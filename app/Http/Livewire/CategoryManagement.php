@@ -23,7 +23,7 @@ class CategoryManagement extends Component
     public function render()
     {
         $categories = Category::where('name', 'like', '%' . $this->search . '%')
-            ->orderBy('id', 'desc')
+            ->orderBy('id', 'asc')
             ->paginate(10);
 
         return view('livewire.category-management', compact('categories'));

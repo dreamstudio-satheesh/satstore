@@ -70,9 +70,6 @@
 
     <!-- Bootstrap Core JS -->
     <script src="{{ url('') }}/assets/js/bootstrap.bundle.min.js"></script>
-
-    @stack('scripts')
-
     <!-- Custom JS -->
     <script src="{{ url('') }}/assets/js/script.js"></script>
 
@@ -80,7 +77,10 @@
     <script src="{{ url('') }}/assets/plugins/apexchart/apexcharts.min.js"></script>
     <script src="{{ url('') }}/assets/plugins/apexchart/chart-data.js"></script>
 
+
     @livewireScripts
+
+    @stack('scripts')
 
 </body>
 
