@@ -3,69 +3,60 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 use App\Models\Category;
 
 class CategoryManagement extends Component
 {
-    public $categories = [];
-    public $name;
+    use WithPagination;
+
     public $categoryId;
-    public $isEditing = false;
+    public $name;
+    public $search = '';
+
+    protected $paginationTheme = 'bootstrap';
 
     protected $rules = [
         'name' => 'required|string|max:255',
     ];
 
-    public function mount()
+    public function render()
     {
-        $this->loadCategories();
+        $categories = Category::where('name', 'like', '%' . $this->search . '%')
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+
+        return view('livewire.category-management', compact('categories'));
     }
 
-    public function loadCategories()
+    public function resetInputFields()
     {
-        $this->categories = Category::all();
+        $this->categoryId = null;
+        $this->name = '';
     }
 
-    public function createCategory()
+    public function store()
     {
         $this->validate();
 
-        Category::create(['name' => $this->name]);
+        Category::updateOrCreate(['id' => $this->categoryId], [
+            'name' => $this->name,
+        ]);
 
-        $this->reset('name');
-        $this->loadCategories();
-        session()->flash('message', 'Category created successfully!');
+        session()->flash('message', 'Category ' . ($this->categoryId ? 'updated' : 'created') . ' successfully!');
+        $this->resetInputFields();
     }
 
-    public function editCategory($id)
+    public function edit($id)
     {
         $category = Category::findOrFail($id);
         $this->categoryId = $category->id;
         $this->name = $category->name;
-        $this->isEditing = true;
     }
 
-    public function updateCategory()
-    {
-        $this->validate();
-
-        $category = Category::findOrFail($this->categoryId);
-        $category->update(['name' => $this->name]);
-
-        $this->reset('name', 'categoryId', 'isEditing');
-        $this->loadCategories();
-        session()->flash('message', 'Category updated successfully!');
-    }
-
-    public function deleteCategory($id)
+    public function delete($id)
     {
         Category::findOrFail($id)->delete();
-        $this->loadCategories();
         session()->flash('message', 'Category deleted successfully!');
-    }
-
-    public function render()
-    {
-        return view('livewire.category-management');
     }
 }
