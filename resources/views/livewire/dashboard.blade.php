@@ -285,9 +285,4 @@
         </div>
     </div>
 
-    @push('script')
-        <!-- Chart JS -->
-        <script src="{{ url('') }}/assets/plugins/apexchart/apexcharts.min.js"></script>
-        <script src="{{ url('') }}/assets/plugins/apexchart/chart-data.js"></script>
-    @endpush
 </div>
