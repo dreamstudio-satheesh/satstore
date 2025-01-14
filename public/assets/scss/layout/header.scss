@@ -1,11 +1,10 @@
 .header {
     background: $__primarycolor;
     background: $__white;
-    border-bottom: 1px solid $__transparent;
+    border-bottom: 1px solid #DEE2E6;
     height: 60px;
     z-index: 999;
     @include position($__fixed,0,0,null,0);
-    @include box-shadow(null, 0, 0px, 15px, 0, rgba(0, 0, 0, .05));
     &:hover{
         .top-nav-search {
             form {
@@ -16,8 +15,8 @@
         }
     }
     .searchinputs{
-        @include position($__absolute,-80px,null,null,null);
         @include transition(all 0.2s ease);
+        color: #67748E;
         &.show{
             @include position($__absolute,0px,null,null,null);
         }
@@ -27,6 +26,10 @@
         @include transform(translate(0px, 100px));
         box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.05);
         border:0;
+        margin-top: 10px !important;
+        &.menu-drop-user {
+            margin-top: 7px !important;
+        }
         @include respond-below(custom991) {
             transition: $__none;
         }
@@ -43,7 +46,8 @@
         @extend %display-flex;
         @extend %justify-content-between;
         @extend %align-items-center;
-        border-right: 1px solid $__light-goose;
+        border-right: 1px solid #DEE2E6;
+        border-bottom: 1px solid #DEE2E6;
         .logo {
             display: $__inline__block;
             line-height: 0;
@@ -68,7 +72,7 @@
     }
 
     @include respond-below(custom991) {
-        #toggle_btn {
+       .header-left #toggle_btn {
             display: $__none;
         }
     }
@@ -148,7 +152,6 @@
     }
     .top-nav-search {
         form {
-            margin-top: 10px;
             position: $__relative;
             width: 230px;
             @include respond-below(custom991) {
@@ -247,7 +250,6 @@
         img {
             width: 38px;
             @include rounded(50%);
-            margin-top: 25px;
         }
         .status {
             border: 2px solid $__white;
@@ -272,7 +274,7 @@
         z-index: 10;
         @include margin-padding(null, 0 20px);
         @include position($__absolute,0,0,null,null);
-        @include respond-below(custom575) {
+        @include respond-below(custom991) {
             display: $__block;
         }
         a{
@@ -339,9 +341,6 @@
                 display: $__block !important;
             }
             .chat-user{
-                display: $__block !important;
-            }
-            .badge{
                 display: $__block !important;
             }
             .logo-small{
@@ -679,29 +678,122 @@ hr{
         padding: 8px 5px !important;
     }
 }
-
+.show{
+    .user-info {
+        &::after{
+            transform: rotate(-140deg);
+            top: 10px;
+        }  
+    }
+}
+.feather-14 {
+    width: 14px;
+    height: 14px;
+}
+.feather-16 {
+    width: 16px;
+}
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 0 30px 0 0;
+    &::after{
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-top: 0;
+        border-left: 0;
+        border-right: 2px solid #1B2950;
+        border-bottom: 2px solid #1B2950;
+        border-radius: 1px;
+        transform: rotate(45deg);
+        transition: all 0.5s;
+        top: 8px;
+        position: absolute;
+        right: 12px;
+    }
+  .user-role {
+    display: block;
+    color: #67748E;
+    font-size: 12px;
+  }
+  .user-letter {
+    background: #1B2950;
+    color: #fff;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 15px;
+    margin-right: 10px;
+  }
+  .user-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1B2950;
+    display: flex;
+    align-items: center;
+  }
+  .user-name img {
+    margin-left: 10px;
+  }
+}
 .user-menu {
-    float: $__right;
     margin: 0;
     position: $__relative;
-    z-index: 99;
     padding-right: 15px;
-    @include respond-below(custom575) {
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    @include respond-below(custom991) {
         display: $__none;
+    }
+    > li {
+        margin-left: 18px;
+        svg {
+            width: 18px;
+            color: #67748E;            
+        }
+        a:hover{
+            svg {
+                color: $__primarycolor;
+            }
+        }
     }
     .dropdown-toggle{
         &::after {
             border: 0;
+            display: none;
+        }
+    }
+    .nav-searchinputs {
+        margin-right: auto;
+    }
+    .nav-item-box > a {
+        background: $__light__ash__grays;
+        border-radius: 8px;
+        width: 36px;
+        height: 36px;
+        display: $__flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        &:hover{
+            background: #EEF3F5;
         }
     }
     &.nav{
        > li{
         >  a{
+            padding: 0;
+            display: $__flex;
+            line-height: normal;
             color: $__secondarycolor;
-            font-size: $__font__size__15;
-            line-height: 70px;
-            height: 60px;
-            @include margin-padding(null, 0 15px);
             &.dropdown-toggle{
                 &.nav-link{
                     &.show {
@@ -712,10 +804,12 @@ hr{
             .badge {
                 color: $__white;
                 font-weight: $__bold;
-                @include position($__absolute,6px,3px,null,null);
+                @include position($__absolute,-7px,-7px,null,null);
                 background: $__primarycolor;
                 width: 20px;
                 height: 20px;
+                font-size: $__font__size__10;
+                border: 2px solid #fff;
                 @extend %display-flex;
                 @extend %justify-content-center;
                 @extend %align-items-center;
@@ -729,11 +823,6 @@ hr{
              a{
                 @extend %display-flex;
                 @extend %align-items-center;
-                img{
-                    width:30px;
-                    height:18px;
-                    margin-right: 5px;
-                }
                 .dropdown-menu {
                     max-height: 150px;
                     min-width: 120px;
@@ -744,15 +833,23 @@ hr{
                 }
             }
             .dropdown-menu {
-                max-height: 170px;
-                min-width: 150px;
-                overflow-y: $__auto;
+                padding: 15px;
+                min-width: 210px;
                 .dropdown-item {
-                    @include margin-padding(null, 5px 15px);
+                    @include margin-padding(null, 10px 10px);
+                    color: #67748E;                    
+                    border-radius: 10px;
+                    transition: none;
+                    &.active,&:hover{
+                        background: #F7F7F7 url(../img/icons/check.svg) no-repeat calc(100% - 12px) center;
+                    }
                 }
                 a{
                     img{
-                        width: $__auto;
+                        width: 20px;
+                        height: 20px;
+                        border-radius: 50%;
+                        margin-right: 10px;
                     }
                 }
             }
@@ -766,14 +863,13 @@ hr{
     input{
         width: 230px;
         height: 35px;
-        border: 1px solid rgba(145, 158, 171, 0.32);
-        @include margin-padding(null,  0 40px 0 8px);
-        @include rounded(5px);
-        @include position($__relative,4px,24px,null,null);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        background: #F6F6F7;
+        @include margin-padding(null,  0 8px 0 40px);
+        @include rounded(50px);
     }   
     .search-addon{
         span{
-            background: $__primarycolor;
             width: 27px;
             height: 27px;
             z-index: 9;
@@ -782,7 +878,7 @@ hr{
             @extend %align-items-center;
             @include rounded(5px);
             cursor: $__pointer;
-            @include position($__absolute,8px,43px,null,null);
+            @include position($__absolute,4px,null,null,23px);
         }
     }
 }

@@ -121,9 +121,6 @@ a:hover{
         color:  $__sandstone;
         @include margin-padding(null, 10px 15px);
         @include rounded(5px);
-        @include respond-below(custom991) {
-            height: 50px;
-        }
     }
     .btn-filters {
         background:   $__primarycolor;

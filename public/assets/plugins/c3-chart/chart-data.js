@@ -367,7 +367,7 @@
 			bottom: 0,
 			top: 0
 		},
-	});
+	}); 
 
 	/*chart-bar*/
 	var chart = c3.generate({

@@ -296,7 +296,7 @@ $(document).ready(function(){
 				e.preventDefault();
 			}
 			if(!$(this).hasClass('subdrop')) {
-				$('ul', $(this).parents('ul:first')).slideUp(250);
+				// $('ul', $(this).parents('ul:first')).slideUp(250);
 				$('a', $(this).parents('ul:first')).removeClass('subdrop');
 				$(this).next('ul').slideDown(350);
 				$(this).addClass('subdrop');
@@ -330,7 +330,7 @@ $(document).ready(function(){
 		if ($('body').hasClass('mini-sidebar')) {
 			$('body').removeClass('mini-sidebar');
 			$(this).addClass('active');
-			$('.subdrop + ul').slideDown();
+			$('.subdrop + ul');
 			localStorage.setItem('screenModeNightTokenState', 'night');
 			setTimeout(function() {
 				$("body").removeClass("mini-sidebar");
@@ -339,7 +339,7 @@ $(document).ready(function(){
 		} else {
 			$('body').addClass('mini-sidebar');
 			$(this).removeClass('active');
-			$('.subdrop + ul').slideUp();
+			$('.subdrop + ul');
 			localStorage.removeItem('screenModeNightTokenState', 'night');
 			setTimeout(function() {
 				$("body").addClass("mini-sidebar");
@@ -382,6 +382,9 @@ $(document).ready(function(){
 	$(document).on("click",".productset",function () {
 		$(this).toggleClass("active");
 	});
+
+
+
 	//Increment Decrement value
 	$('.inc.button').click(function(){
 	    var $this = $(this),
@@ -538,65 +541,6 @@ $(document).ready(function(){
 		})
 	}
 
-	var right_side_views = '<div class="right-side-views d-none">' +
-	'<ul class="sticky-sidebar siderbar-view">' +
-		'<li class="sidebar-icons">' +
-			'<a class="toggle tipinfo open-layout open-siderbar" href="javascript:void(0);" data-toggle="tooltip" data-placement="left" data-bs-original-title="Tooltip on left">' +
-				'<div class="tooltip-five ">' +
-					'<img src="assets/img/icons/siderbar-icon2.svg" class="feather-five" alt="">' +
-					'<span class="tooltiptext">Check Layout</span>' +
-				'</div>' +
-			'</a>' +
-		'</li>' +
-	'</ul>' +
-'</div>' +
-
-'<div class="sidebar-layout">' +
-	'<div class="sidebar-content">' +
-		'<div class="sidebar-top">' +
-			'<div class="container-fluid">' +
-				'<div class="row align-items-center">' +
-					'<div class="col-xl-6 col-sm-6 col-12">' +
-						'<div class="sidebar-logo">' +
-							'<a href="index.html" class="logo">' +
-								'<img src="assets/img/logo.png" alt="Logo" class="img-flex">' +
-							'</a>' +
-						'</div>' +
-					'</div>' +
-					'<div class="col-xl-6 col-sm-6 col-12">' +
-						'<a class="btn-closed" href="javascript:void(0);"><img class="img-fliud" src="assets/img/icons/sidebar-delete-icon.svg" alt="demo"></a>' +
-					'</div>' +
-				'</div>' +
-			'</div>' +
-		'</div>' +
-		'<div class="container-fluid">' +
-			'<div class="row align-items-center">' +
-				'<h5 class="sidebar-title">Choose layout</h5>' +
-				'<div class="col-xl-12 col-sm-6 col-12">' +
-					'<div class="sidebar-image align-center">' +
-						'<img class="img-fliud" src="assets/img/demo-one.png" alt="demo">' +
-					'</div>' +
-					'<div class="row">' +
-						'<div class="col-lg-6 layout">' +
-							'<h5 class="layout-title">Dark Mode</h5>' +
-						'</div>' +
-						'<div class="col-lg-6 layout dark-mode">' +
-							'<label class="toggle-switch" for="notification_switch3">' +
-							'<span>' +
-							'<input type="checkbox" class="toggle-switch-input" id="notification_switch3">' +
-							'<span class="toggle-switch-label ms-auto">' +
-							'	<span class="toggle-switch-indicator"></span>' +
-							'</span>' +
-							'</span>' +
-							' </label>' +
-						'</div>' +
-					'</div>' +
-				'</div>' +
-			'</div>' +
-		'</div>' +
-	'</div>' +
-	'</div>' +
-    $("body").append(right_side_views);
 
 	// Sidebar Visible
 	
@@ -679,9 +623,93 @@ $(document).ready(function(){
 		}
 		
 	});
+
+
+
+$('.add-setting').on("click", function (e) {
+	e.preventDefault();
+	$('.preview-toggle.sidebar-settings').addClass('show-settings');
+});
+$('.sidebar-close').on("click", function (e) {
+	e.preventDefault();
+	$('.preview-toggle.sidebar-settings').removeClass('show-settings');
+});
+$('.navigation-add').on("click", function (e) {
+	e.preventDefault();
+	$('.nav-toggle.sidebar-settings').addClass('show-settings');
+});
+$('.sidebar-close').on("click", function (e) {
+	e.preventDefault();
+	$('.nav-toggle.sidebar-settings').removeClass('show-settings');
+});
+
+// DarkMode with LocalStorage
+if($('#dark-mode-toggle').length > 0) {
+	$("#dark-mode-toggle").children(".light-mode").addClass("active");
+	let darkMode = localStorage.getItem('darkMode'); 
+	
+	const darkModeToggle = document.querySelector('#dark-mode-toggle');
+	
+	const enableDarkMode = () => {
+		document.body.setAttribute('data-theme', 'dark');
+		$("#dark-mode-toggle").children(".dark-mode").addClass("active");
+		$("#dark-mode-toggle").children(".light-mode").removeClass("active");
+		localStorage.setItem('darkMode', 'enabled');
+	}
+
+	const disableDarkMode = () => {
+	  document.body.removeAttribute('data-theme', 'dark');
+		$("#dark-mode-toggle").children(".dark-mode").removeClass("active");
+		$("#dark-mode-toggle").children(".light-mode").addClass("active");
+	  localStorage.setItem('darkMode', null);
+	}
+	 
+	if (darkMode === 'enabled') {
+		enableDarkMode();
+	}
+
+	darkModeToggle.addEventListener('click', () => {
+	  darkMode = localStorage.getItem('darkMode'); 
+	  
+	  if (darkMode !== 'enabled') {
+		enableDarkMode();
+	  } else {  
+		disableDarkMode(); 
+	  }
+	});
+}
 	  
 
 });
+function toggleFullscreen(elem) {
+	elem = elem || document.documentElement;
+	if (!document.fullscreenElement && !document.mozFullScreenElement &&
+	  !document.webkitFullscreenElement && !document.msFullscreenElement) {
+	  if (elem.requestFullscreen) {
+		elem.requestFullscreen();
+	  } else if (elem.msRequestFullscreen) {
+		elem.msRequestFullscreen();
+	  } else if (elem.mozRequestFullScreen) {
+		elem.mozRequestFullScreen();
+	  } else if (elem.webkitRequestFullscreen) {
+		elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+	  }
+	} else {
+	  if (document.exitFullscreen) {
+		document.exitFullscreen();
+	  } else if (document.msExitFullscreen) {
+		document.msExitFullscreen();
+	  } else if (document.mozCancelFullScreen) {
+		document.mozCancelFullScreen();
+	  } else if (document.webkitExitFullscreen) {
+		document.webkitExitFullscreen();
+	  }
+	}
+  }
+  
+  document.getElementById('btnFullscreen').addEventListener('click', function() {
+	toggleFullscreen();
+  });
 
 	
 
