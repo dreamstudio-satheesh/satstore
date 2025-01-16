@@ -14,8 +14,6 @@ class CategoryManagement extends Component
     public $name;
     public $search = '';
 
-    protected $paginationTheme = 'bootstrap';
-
     protected $rules = [
         'name' => 'required|string|max:255',
     ];
@@ -33,6 +31,7 @@ class CategoryManagement extends Component
     {
         $this->categoryId = null;
         $this->name = '';
+        $this->search = '';
     }
 
     public function store()
@@ -45,6 +44,7 @@ class CategoryManagement extends Component
 
         session()->flash('message', 'Category ' . ($this->categoryId ? 'updated' : 'created') . ' successfully!');
         $this->resetInputFields();
+        
     }
 
     public function edit($id)

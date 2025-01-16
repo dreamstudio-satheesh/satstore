@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Livewire\Dashboard;
-use App\Http\Livewire\CategoryManagement;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\ProductManagement;
+use App\Http\Livewire\CategoryManagement;
 
 Route::get('/',  [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm']);
 
@@ -23,3 +24,5 @@ Auth::routes([
  Route::get('/dashboard', Dashboard::class);
 
  Route::get('/categories', CategoryManagement::class);
+
+ Route::get('/products', ProductManagement::class);

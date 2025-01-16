@@ -16,22 +16,18 @@
                     <h6 class="submenu-hdr">Product Management</h6>
                     <ul>
                         <li>
-                            <a href="/products" wire:navigate>
+                            <a href="/products"  accesskey="p">
                                 <i data-feather="box"></i><span>Products</span>
                             </a>
                         </li>
+                       
                         <li>
-                            <a href="/products/create" wire:navigate>
-                                <i data-feather="plus-square"></i><span>Create Product</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/categories" href="/categories" wire:navigate wire:current.exact="font-bold">
+                            <a href="/categories" href="/categories"  accesskey="c">
                                 <i data-feather="codepen"></i><span>Categories</span>
                             </a>
                         </li>
                         <li>
-                            <a href="/barcodes" wire:navigate>
+                            <a href="/barcodes" >
                                 <i data-feather="align-justify"></i><span>Print Barcode</span>
                             </a>
                         </li>
