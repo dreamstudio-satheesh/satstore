@@ -67,9 +67,9 @@
                         </div>
 
                         <div class="pt-3">
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" class="btn btn-rounded btn-secondary">Save</button>
                             <button type="button" wire:click="resetInputFields"
-                                class="btn btn-secondary">Cancel</button>
+                                class="btn  btn-rounded btn-warning">Cancel</button>
                         </div>
                     </form>
                 </div>
