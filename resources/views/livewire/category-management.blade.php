@@ -33,7 +33,7 @@
                                     <td>{{ $category->name }}</td>
                                     <td>
                                         <button wire:click="edit({{ $category->id }})"
-                                            class="btn btn-primary btn-sm">Edit</button>
+                                            class="btn btn-primary btn-sm"  accesskey="{{ $loop->index < 9 ? $loop->index + 1 : 0 }}">Edit</button>
                                         <button wire:click="delete({{ $category->id }})"
                                             class="btn btn-danger btn-sm">Delete</button>
                                     </td>

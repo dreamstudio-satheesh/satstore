@@ -22,7 +22,7 @@
                         </li>
                        
                         <li>
-                            <a href="/categories" href="/categories"  accesskey="c">
+                            <a href="/categories" href="/categories" accesskey="t">
                                 <i data-feather="codepen"></i><span>Categories</span>
                             </a>
                         </li>
@@ -52,22 +52,18 @@
                     <h6 class="submenu-hdr">Customer Management</h6>
                     <ul>
                         <li>
-                            <a href="/customers" wire:navigate>
+                            <a href="/customers" accesskey="c">
                                 <i data-feather="user"></i><span>Customers</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="/customers/create" wire:navigate>
-                                <i data-feather="user-plus"></i><span>Add Customer</span>
-                            </a>
-                        </li>
+                       
                     </ul>
                 </li>
                 <li class="submenu-open">
                     <h6 class="submenu-hdr">User Management</h6>
                     <ul>
                         <li>
-                            <a href="/users" wire:navigate>
+                            <a href="/users" accesskey="u">
                                 <i data-feather="users"></i><span>Users</span>
                             </a>
                         </li>

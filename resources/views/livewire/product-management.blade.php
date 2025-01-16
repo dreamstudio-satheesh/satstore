@@ -36,7 +36,7 @@
                                     <td>{{ $product->price }}</td>
                                     <td>{{ $product->gst_slab }}%</td>
                                     <td>
-                                        <button wire:click="edit({{ $product->id }})" class="btn btn-primary btn-sm">Edit</button>
+                                        <button wire:click="edit({{ $product->id }})" class="btn btn-primary btn-sm"  accesskey="{{ $loop->index < 9 ? $loop->index + 1 : 0 }}">Edit</button>
                                         <button wire:click="delete({{ $product->id }})" class="btn btn-danger btn-sm">Delete</button>
                                     </td>
                                 </tr>
