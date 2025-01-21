@@ -1,14 +1,17 @@
 <?php
 
 use App\Http\Livewire\Dashboard;
+use App\Http\Livewire\CreateBill;
 use App\Http\Livewire\CreateUser;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Livewire\UserManagement;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BillController;
+use App\Http\Controllers\SaleController;
 use App\Http\Livewire\ProductManagement;
 use App\Http\Livewire\CategoryManagement;
-use App\Http\Livewire\CreateBill;
 use App\Http\Livewire\CustomerManagement;
+use App\Http\Controllers\CustomerController;
 
 Route::get('/',  [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm']);
 
@@ -23,6 +26,26 @@ Auth::routes([
   ]);
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/api/customers/search', [CustomerController::class, 'search'])->name('customers.search');
+Route::post('/api/customers', [CustomerController::class, 'store'])->name('customers.store');
+
+
+
+// Show create bill form
+Route::get('/bills/create', [BillController::class, 'create'])->name('bill.create');
+
+// AJAX route for product searching
+Route::get('/api/products/search', [BillController::class, 'searchProducts'])->name('products.search');
+
+// Store final bill in DB
+Route::post('/bills', [BillController::class, 'store'])->name('bill.store');
+
+
+// Show create bill form
+Route::get('/billing', [SaleController::class, 'create'])->name('sale.create');
+
+
 
  Route::get('/home', Dashboard::class);
 

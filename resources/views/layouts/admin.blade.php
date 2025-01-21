@@ -53,7 +53,7 @@
         <!-- /Sidebar -->
 
         <div class="page-wrapper">
-            {{ $slot }}
+            @yield('content')
         </div>
 
     </div>
