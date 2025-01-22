@@ -3,7 +3,7 @@
 
 
         <!-- Create/Update Product Form -->
-        <div class="col-lg-4 col-md-10  col-sm-11">
+        <div class="col-lg-4 col-md-10  col-sm-10">
             <div class="card">
                 <div class="card-header">
                     <h5>{{ $productId ? 'Edit Product' : 'Create Product' }}</h5>
