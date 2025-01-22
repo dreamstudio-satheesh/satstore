@@ -35,8 +35,6 @@
 
     @stack('styles')
 
-    @livewireStyles
-
 </head>
 
 <body>
@@ -85,7 +83,6 @@
     <script src="{{ url('') }}/assets/plugins/apexchart/chart-data.js"></script>
 
 
-    @livewireScripts
 
     @stack('scripts')
 

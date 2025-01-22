@@ -45,6 +45,8 @@ Route::post('/bills', [BillController::class, 'store'])->name('bill.store');
 // Show create bill form
 Route::get('/billing', [SaleController::class, 'create'])->name('sale.create');
 
+Route::get('/bill-test', [SaleController::class, 'bill'])->name('sale.bill');
+
 
 
  Route::get('/home', Dashboard::class);
