@@ -1,56 +1,6 @@
 <div class="content">
     <div class="row">
-        <!-- Products List -->
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h5>Products</h5>
-                    <input id="searchInput" wire:model.live.debounce.300ms="search" type="text" class="form-control"
-                        placeholder="Search Products..." accesskey="s">
-                </div>
-                <div class="card-body">
-                    @if (session()->has('message'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('message') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
 
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Name (Tamil)</th>
-                                <th>Name (English)</th>
-                                <th>Price</th>
-                                <th>GST Slab</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse ($products as $product)
-                                <tr>
-                                    <td>{{ ($products->currentPage() - 1) * $products->perPage() + $loop->index + 1 }}</td>
-                                    <td>{{ $product->name_tamil }}</td>
-                                    <td>{{ $product->name_english }}</td>
-                                    <td>{{ $product->price }}</td>
-                                    <td>{{ $product->gst_slab }}%</td>
-                                    <td>
-                                        <button wire:click="edit({{ $product->id }})" class="btn btn-primary btn-sm"  accesskey="{{ $loop->index < 9 ? $loop->index + 1 : 0 }}">Edit</button>
-                                        <button wire:click="delete({{ $product->id }})" class="btn btn-danger btn-sm">Delete</button>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="6">No Products Found</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                    {{ $products->links() }}
-                </div>
-            </div>
-        </div>
 
         <!-- Create/Update Product Form -->
         <div class="col-md-4">
@@ -107,5 +57,60 @@
                 </div>
             </div>
         </div>
+
+        
+        <!-- Products List -->
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Products</h5>
+                    <input id="searchInput" wire:model.live.debounce.300ms="search" type="text" class="form-control"
+                        placeholder="Search Products..." accesskey="s">
+                </div>
+                <div class="card-body">
+                    @if (session()->has('message'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('message') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Name (Tamil)</th>
+                                <th>Name (English)</th>
+                                <th>Price</th>
+                                <th>GST Slab</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($products as $product)
+                                <tr>
+                                    <td>{{ ($products->currentPage() - 1) * $products->perPage() + $loop->index + 1 }}</td>
+                                    <td>{{ $product->name_tamil }}</td>
+                                    <td>{{ $product->name_english }}</td>
+                                    <td>{{ $product->price }}</td>
+                                    <td>{{ $product->gst_slab }}%</td>
+                                    <td>
+                                        <button wire:click="edit({{ $product->id }})" class="btn btn-primary btn-sm"  accesskey="{{ $loop->index < 9 ? $loop->index + 1 : 0 }}">Edit</button>
+                                        <button wire:click="delete({{ $product->id }})" class="btn btn-danger btn-sm">Delete</button>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6">No Products Found</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                    {{ $products->links() }}
+                </div>
+            </div>
+        </div>
+
+        
     </div>
 </div>
