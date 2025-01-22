@@ -3,7 +3,7 @@
 
 
         <!-- Create/Update Product Form -->
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-header">
                     <h5>{{ $productId ? 'Edit Product' : 'Create Product' }}</h5>
@@ -60,7 +60,7 @@
 
 
         <!-- Products List -->
-        <div class="col-md-8">
+        <div class="col-lg-8 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-header">
                     <h5>Products</h5>
