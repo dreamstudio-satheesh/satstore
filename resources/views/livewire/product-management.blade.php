@@ -58,7 +58,7 @@
             </div>
         </div>
 
-        
+
         <!-- Products List -->
         <div class="col-md-8">
             <div class="card">
@@ -75,7 +75,7 @@
                         </div>
                     @endif
 
-                    <table class="table table-bordered">
+                    <table class="table table-responsive table-bordered">
                         <thead>
                             <tr>
                                 <th>No.</th>
