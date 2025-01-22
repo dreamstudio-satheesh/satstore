@@ -68,7 +68,7 @@
                             <input type="text" class="form-control" wire:model="name_english" placeholder="Name (English)">
                             @error('name_english') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
-                        <div class="form-group">
+                       {{--  <div class="form-group">
                             <select class="form-control" wire:model="category_id">
                                 <option value="">Select a Category</option>
                                 @foreach ($categories as $category)
@@ -76,7 +76,7 @@
                                 @endforeach
                             </select>
                             @error('category_id') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div>
+                        </div> --}}
                         <div class="form-group">
                             <input type="text" class="form-control" wire:model="hsn_code" placeholder="HSN Code">
                             @error('hsn_code') <span class="text-danger">{{ $message }}</span> @enderror

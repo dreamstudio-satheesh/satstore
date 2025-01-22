@@ -14,7 +14,7 @@ class ProductManagement extends Component
     public $productId;
     public $name_tamil;
     public $name_english;
-    public $category_id;
+    public $category_id=1;
     public $hsn_code;
     public $price;
     public $gst_slab = '12';
@@ -58,6 +58,7 @@ class ProductManagement extends Component
 
     public function store()
     {
+
         $this->validate();
 
         Product::updateOrCreate(['id' => $this->productId], [
