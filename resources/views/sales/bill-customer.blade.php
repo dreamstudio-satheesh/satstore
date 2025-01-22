@@ -9,15 +9,7 @@
                             <select id="customer-select" class="form-control" style="width:100%;">
                             </select>
                         </div>
-                        <div class="col-lg-2 col-sm-2 col-2 ps-0">
-                            <div class="add-icon">
-                                <a href="javascript:void(0);" data-bs-toggle="modal"
-                                    data-bs-target="#addCustomerModal">
-                                    <img src="assets/img/icons/plus1.svg" alt="img">
-                                </a>
-
-                            </div>
-                        </div>
+                       
 
                     </div>
                 </div>

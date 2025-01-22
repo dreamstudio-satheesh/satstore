@@ -17,7 +17,7 @@
                             <div class="form-group">
                                 <div class="input-groupicon">
                                     <input type="text" id="product-search" placeholder="Scan/Search Product ..."
-                                        autofocus>
+                                        accesskey="s" autofocus>
                                     <div class="addonset">
                                         <img src="assets/img/icons/scanners.svg" alt="img">
                                     </div>
@@ -33,7 +33,7 @@
                             </div>
                         </div>
 
-                       
+
                     </div>
                 </div>
 
@@ -65,17 +65,38 @@
         <div class="card mb-3">
             <div class="card-body">
                 <h5 class="card-title">Summary</h5>
-                <div class="row">
-                    <div class="col-md-4">
-                        <p>Subtotal: <span id="subtotal" class="font-weight-bold">0.00</span></p>
-                    </div>
-                    <div class="col-md-4">
-                        <p>Tax: <span id="tax" class="font-weight-bold">0.00</span></p>
-                    </div>
-                    <div class="col-md-4">
-                        <p>Total: <span id="total" class="font-weight-bold">0.00</span></p>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>GST Rate</th>
+                            <th>Taxable Value</th>
+                            <th>CGST</th>
+                            <th>SGST</th>
+                            <th>Total Tax</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tax-breakup">
+                        <!-- Tax breakup rows will be dynamically inserted here -->
+                    </tbody>
+                </table>
+
+                <div class="row py-3 my-3 mx-1  bg-light">
+                    <div class="col text-center">
+                        <span class="text-muted">Subtotal:</span>
+                        <span class="text-primary font-weight-bold" id="subtotal">₹0.00</span>
+
+                        <span class="mx-4"></span> <!-- Spacer between Subtotal and Tax -->
+
+                        <span class="text-muted">Tax:</span>
+                        <span class="text-danger font-weight-bold" id="tax">₹0.00</span>
+
+                        <span class="mx-4"></span> <!-- Spacer between Tax and Total -->
+
+                        <span class="text-muted">Total:</span>
+                        <span class="text-success font-weight-bold" id="total">₹0.00</span>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -83,46 +104,6 @@
         <div class="text-right">
             <button id="finalize-sale-btn" class="btn btn-success mr-2" accesskey="f">Finalize Sale (F3)</button>
             <button id="clear-sale-btn" class="btn btn-danger" accesskey="e">Clear Sale (F2)</button>
-        </div>
-    </div>
-
-
-
-
-    {{-- BOOTSTRAP MODAL FOR ADDING A NEW CUSTOMER --}}
-    <div class="modal fade" id="addCustomerModal" tabindex="-1" aria-labelledby="create" aria-hidden="true">
-        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Create</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-
-                <form id="newCustomerForm">
-                    @csrf
-
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Name *</label>
-                            <input type="text" name="name" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Mobile *</label>
-                            <input type="text" name="mobile" class="form-control" required>
-                        </div>
-                        {{-- Optionally: address, etc. --}}
-                    </div>
-                    <div class="modal-footer">
-
-                        <a class="btn btn-cancel" data-bs-dismiss="modal">Cancel</a>
-                        <button type="submit" class="btn btn-submit me-2"> Save Customer
-                        </button>
-                    </div>
-                </form>
-
-            </div>
         </div>
     </div>
 
@@ -205,6 +186,17 @@
                     return;
                 }
 
+                // Check if the query is numeric and matches a barcode
+                const matchingProduct = this.products.find(product => product.barcode === query);
+
+                if (matchingProduct) {
+                    // If a matching product is found, auto-add it to sales
+                    this.addItem(matchingProduct, 1); // Default quantity is 1
+                    this.resetFields();
+                    return;
+                }
+
+                // If no exact barcode match, filter products for search
                 this.filteredProducts = this.products.filter(product =>
                     product.name_tamil.includes(query) ||
                     (product.name_english && product.name_english.includes(query)) ||
@@ -257,8 +249,11 @@
 
             displayResults(results) {
                 this.searchResults.innerHTML = "";
-                if (results.length > 0) {
-                    results.forEach((product, index) => {
+                // Limit results to a maximum of 6
+                const limitedResults = results.slice(0, 6);
+
+                if (limitedResults.length > 0) {
+                    limitedResults.forEach((product, index) => {
                         const li = document.createElement("li");
                         li.textContent = product.name_tamil || product.name_english;
                         li.className = "dropdown-item";
@@ -304,6 +299,7 @@
                         id: product.id,
                         name: product.name_tamil || product.name_english,
                         price: product.price,
+                        gst_slab: product.gst_slab,
                         quantity: quantity,
                         total: product.price * quantity,
                     });
@@ -316,23 +312,105 @@
                 this.salesList.forEach((item, index) => {
                     const row = document.createElement("tr");
                     row.innerHTML = `
-                <td>${item.name}</td>
-                <td>${item.price.toFixed(2)}</td>
-                <td>${item.quantity}</td>
-                <td>${item.total.toFixed(2)}</td>
-                <td><button data-index="${index}" class="btn btn-danger btn-sm remove-item-btn">Remove</button></td>
-            `;
+                        <td>${item.name}</td>
+                        <td>${parseFloat(item.price).toFixed(2)}</td>
+                        <td>
+                            <input 
+                                type="number" 
+                                class="form-control quantity-input" 
+                                style="max-width:150px"
+                                data-index="${index}" 
+                                value="${item.quantity}" 
+                                min="1"
+                            />
+                        </td>
+                        <td class="total-cell">${item.total.toFixed(2)}</td>
+                        <td><button data-index="${index}" class="btn btn-danger btn-sm remove-item-btn">Remove</button></td>
+                    `;
                     this.salesTableBody.appendChild(row);
                 });
+
+                // Attach event listeners to quantity inputs
+                this.salesTableBody.querySelectorAll(".quantity-input").forEach(input => {
+                    input.addEventListener("change", (e) => this.handleQuantityChange(e));
+                });
+
                 this.calculateTotals();
             }
 
-            calculateTotals() {
-                const subtotal = this.salesList.reduce((sum, item) => sum + item.total, 0);
-                document.getElementById("subtotal").textContent = subtotal.toFixed(2);
-                document.getElementById("tax").textContent = (subtotal * 0.1).toFixed(2);
-                document.getElementById("total").textContent = (subtotal * 1.1).toFixed(2);
+            handleQuantityChange(event) {
+                const index = event.target.dataset.index;
+                const newQuantity = parseInt(event.target.value);
+
+                if (isNaN(newQuantity) || newQuantity <= 0) {
+                    alert("Please enter a valid quantity.");
+                    event.target.value = this.salesList[index].quantity; // Reset to old value
+                    return;
+                }
+
+                // Update the quantity and total for the selected item
+                this.salesList[index].quantity = newQuantity;
+                this.salesList[index].total = this.salesList[index].price * newQuantity;
+
+                // Update the DOM and totals
+                this.updateSalesList();
             }
+
+
+            calculateTotals() {
+                let subtotalExclTax = 0; // Subtotal excluding tax
+                let totalTax = 0; // Total tax amount
+                const taxBreakup = {}; // Store tax details by GST slab
+
+                this.salesList.forEach(item => {
+                    const taxRate = parseFloat(item.gst_slab) / 100; // Convert slab to decimal
+                    const priceExclTax = item.price / (1 + taxRate); // Price excluding tax
+                    const taxAmount = item.price - priceExclTax; // Tax amount per unit
+
+                    // Add to running totals
+                    subtotalExclTax += priceExclTax * item.quantity;
+                    totalTax += taxAmount * item.quantity;
+
+                    // Update tax breakup for the current GST slab
+                    if (!taxBreakup[item.gst_slab]) {
+                        taxBreakup[item.gst_slab] = {
+                            taxableValue: 0,
+                            taxAmount: 0
+                        };
+                    }
+                    taxBreakup[item.gst_slab].taxableValue += priceExclTax * item.quantity;
+                    taxBreakup[item.gst_slab].taxAmount += taxAmount * item.quantity;
+                });
+
+                // Display the totals in the DOM
+                document.getElementById("subtotal").textContent = subtotalExclTax.toFixed(2);
+                document.getElementById("tax").textContent = totalTax.toFixed(2);
+                document.getElementById("total").textContent = (subtotalExclTax + totalTax).toFixed(2);
+
+                // Render tax breakup in the DOM
+                const taxBreakupContainer = document.getElementById("tax-breakup");
+                taxBreakupContainer.innerHTML = ""; // Clear existing content
+
+                Object.keys(taxBreakup).forEach(slab => {
+                    const {
+                        taxableValue,
+                        taxAmount
+                    } = taxBreakup[slab];
+                    const cgst = taxAmount / 2; // Split tax equally for CGST and SGST
+                    const sgst = taxAmount / 2;
+
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${slab}%</td>
+                        <td>${taxableValue.toFixed(2)}</td>
+                        <td>${cgst.toFixed(2)}</td>
+                        <td>${sgst.toFixed(2)}</td>
+                        <td>${taxAmount.toFixed(2)}</td>
+                    `;
+                    taxBreakupContainer.appendChild(row);
+                });
+            }
+
 
             resetFields() {
                 this.searchField.value = "";
