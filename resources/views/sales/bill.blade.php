@@ -425,5 +425,65 @@
             const salesManager = new SalesManager();
             salesManager.products = products; // Set products for the manager
         });
+
+
+        // Customer Select2
+        $('#customer-select').select2({
+                placeholder: 'Type name or mobile...',
+                ajax: {
+                    url: '{{ route('customers.search') }}', // /api/customers/search
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            term: params.term
+                        };
+                    },
+                    processResults: function(data) {
+                        // data => { results: [ {id, text}, ... ] }
+                        return {
+                            results: data
+                        };
+                    },
+                    cache: true
+                }
+        });
+
+        // 9. ADD NEW CUSTOMER MODAL//
+
+        $('#newCustomerForm').on('submit', function(e) {
+            e.preventDefault();
+
+            // Collect form data: name, mobile, etc.
+            let formData = $(this).serialize();
+
+            // POST to your existing route: /api/customers
+            $.ajax({
+                url: '{{ route('customers.store') }}', // /api/customers
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    // response => { id, text } (you can define how you return it)
+                    let newOption = new Option(response.text, response.id, false, true);
+                    $('#customer-select').append(newOption).trigger('change');
+
+                    // Close modal
+                    $('#addCustomerModal').modal('hide');
+                    // Reset form
+                    $('#newCustomerForm')[0].reset();
+                },
+                error: function(err) {
+                    alert('Failed to create customer. ' + err.responseText);
+                }
+            });
+        });
+        
+        
+        // Set current date in DD-MM-YYYY format
+        const currentDate = new Date();
+        const formattedDate = currentDate.toLocaleDateString('en-GB').replace(/\//g, '-'); // Formats as DD-MM-YYYY
+
+        // Set the value of the invoice date input
+        $('#invoice-date').val(formattedDate);
     </script>
 @endpush
