@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\DB;
 
 class BillController extends Controller
 {
+     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Show the "Create Bill" page
      * (Cart logic is handled by localStorage on the client)
