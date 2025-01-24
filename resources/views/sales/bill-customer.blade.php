@@ -26,7 +26,7 @@
                 <div class="form-group">
                     <label>Invoice Date </label>
                     <div class="input-groupicon">
-                        <input id="invoice-date" type="text" placeholder="DD-MM-YYYY" class="datetimepicker">
+                        <input id="invoice-date" type="text" placeholder="DD-MM-YYYY" class="form-control">
                         <div class="addonset">
                             <img src="assets/img/icons/calendars.svg" alt="img">
                         </div>
