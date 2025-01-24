@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Livewire\Dashboard;
-use App\Http\Livewire\CreateBill;
 use App\Http\Livewire\CreateUser;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Livewire\UserManagement;
@@ -42,10 +41,8 @@ Route::get('/api/products/search', [BillController::class, 'searchProducts'])->n
 Route::post('/bills', [BillController::class, 'store'])->name('bill.store');
 
 
-// Show create bill form
-Route::get('/billing', [SaleController::class, 'create'])->name('sale.create');
 
-Route::get('/bill-test', [SaleController::class, 'bill'])->name('sale.bill');
+Route::get('/billing', [SaleController::class, 'bill'])->name('sale.bill');
 
 
 
@@ -62,5 +59,3 @@ Route::get('/bill-test', [SaleController::class, 'bill'])->name('sale.bill');
  Route::get('/users', UserManagement::class);
 
  Route::get('/users/create', CreateUser::class);
-
- Route::get('/bill/create', CreateBill::class);

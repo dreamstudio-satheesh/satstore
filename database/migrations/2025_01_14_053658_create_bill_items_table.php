@@ -16,8 +16,11 @@ return new class extends Migration
             $table->foreignId('bill_id')->constrained()->cascadeOnDelete();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->integer('quantity');
-            $table->decimal('price', 10, 2);
-            $table->enum('gst_slab', ['5', '12', '18']);
+            $table->decimal('price', 10, 2); // Price including tax
+            $table->decimal('taxable_value', 10, 2); // Price excluding tax
+            $table->enum('gst_slab', ['5', '12', '18']); // GST slab percentage
+            $table->decimal('cgst', 10, 2); // CGST value
+            $table->decimal('sgst', 10, 2); // SGST value
             $table->timestamps();
         });
     }

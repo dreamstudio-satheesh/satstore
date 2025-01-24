@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Product;
+
 use App\Models\Bill;
-use App\Models\BillItem;
+use App\Models\Product;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BillController extends Controller
 {
@@ -57,51 +58,55 @@ class BillController extends Controller
      */
     public function store(Request $request)
     {
-        // The entire cart is passed as JSON in "cart_data"
-        $cartJson = $request->input('cart_data');
-        $cart = json_decode($cartJson, true) ?? [];
-
-        if (empty($cart)) {
-            return redirect()->route('bill.create')
-                ->with('error', 'No items in cart.');
-        }
-
-        $discount   = $request->input('discount', 0);
-        $customerId = $request->input('customer_id');
-
-        // Sum up total on server side (security check)
-        $sum = 0;
-        foreach ($cart as $item) {
-            $sum += $item['price'] * $item['quantity'];
-        }
-
-        $finalAmount = $sum - $discount;
-        if ($finalAmount < 0) {
-            $finalAmount = 0;
-        }
-
-        // Create Bill
-        $bill = Bill::create([
-            'user_id'      => auth()->id(), // or however you're assigning user_id
-            'customer_id'  => $customerId,
-            'total_amount' => $sum,
-            'discount'     => $discount,
-            'final_amount' => $finalAmount,
+        $validated = $request->validate([
+            'customer_id' => 'nullable|exists:customers,id',
+            'invoice_date' => 'required|date',
+            'discount' => 'required|numeric|min:0',
+            'subtotal' => 'required|numeric|min:0',
+            'tax' => 'required|numeric|min:0',
+            'total' => 'required|numeric|min:0',
+            'items' => 'required|array|min:1',
+            'items.*.id' => 'required|exists:products,id',
+            'items.*.quantity' => 'required|integer|min:1',
+            'items.*.price' => 'required|numeric|min:0',
+            'items.*.gst_slab' => 'required|in:5,12,18',
         ]);
-
-        // Create Bill Items
-        foreach ($cart as $item) {
-            BillItem::create([
-                'bill_id'    => $bill->id,
-                'product_id' => $item['product_id'],
-                'quantity'   => $item['quantity'],
-                'price'      => $item['price'],
-                'gst_slab'   => $item['gst_slab'] ?? null,
+    
+        DB::transaction(function () use ($validated) {
+            // Insert into bills table
+            $bill = Bill::create([
+                'user_id' => auth()->id(),
+                'customer_id' => $validated['customer_id'],
+                'total_amount' => $validated['subtotal'],
+                'discount' => $validated['discount'],
+                'final_amount' => $validated['total'],
             ]);
-        }
+        
+            // Insert bill items with tax details
+            foreach ($validated['items'] as $item) {
+                $taxableValue = $item['price'] / (1 + ($item['gst_slab'] / 100));
+                $taxAmount = $item['price'] - $taxableValue;
+                $cgst = $taxAmount / 2;
+                $sgst = $taxAmount / 2;
+                        
+                $bill->items()->create([
+                    'product_id' => $item['id'],
+                    'quantity' => $item['quantity'],
+                    'price' => $item['price'],
+                    'taxable_value' => $taxableValue,
+                    'gst_slab' => $item['gst_slab'],
+                    'cgst' => $cgst,
+                    'sgst' => $sgst,
+                ]);
+            }
+        });
+        
+
+        return response()->json(['message' => 'Bill created successfully.']);
+    
 
         // After saving, just redirect
-        return redirect()->route('bill.create')
-            ->with('success', 'Bill created successfully!');
+       /*  return redirect()->route('bill.create')
+            ->with('success', 'Bill created successfully!'); */
     }
 }

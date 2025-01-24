@@ -499,5 +499,51 @@
 
         // Set the value of the invoice date input
         $('#invoice-date').val(formattedDate);
+
+
+
+        document.getElementById('finalize-sale-btn').addEventListener('click', function() {
+            if (salesManager.salesList.length === 0) {
+                alert('No items in the cart. Add products to proceed.');
+                return;
+            }
+
+            const customerId = $('#customer-select').val(); // Selected customer ID
+            const invoiceDate = $('#invoice-date').val(); // Invoice date
+            const discount = parseFloat($('#discount').val()) || 0.00; // Discount input
+            const subtotal = parseFloat(document.getElementById('subtotal').textContent);
+            const tax = parseFloat(document.getElementById('tax').textContent);
+            const total = parseFloat(document.getElementById('total').textContent);
+
+            // Prepare data payload
+            const payload = {
+                customer_id: customerId || null,
+                invoice_date: invoiceDate,
+                discount: discount,
+                subtotal: subtotal,
+                tax: tax,
+                total: total,
+                items: salesManager.salesList, // Include items from sales list
+            };
+
+            // Send data to the backend
+            $.ajax({
+                url: '{{ route('bills.store') }}', // Define a route for storing bills
+                type: 'POST',
+                data: JSON.stringify(payload),
+                contentType: 'application/json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'), // CSRF protection
+                },
+                success: function(response) {
+                    alert('Sale finalized successfully!');
+                    salesManager.salesList = []; // Clear sales cart
+                    salesManager.updateSalesList(); // Refresh UI
+                },
+                error: function(xhr) {
+                    alert('Failed to finalize sale. Please try again.');
+                },
+            });
+        });
     </script>
 @endpush
