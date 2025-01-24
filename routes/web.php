@@ -29,16 +29,11 @@ Auth::routes([
 Route::get('/api/customers/search', [CustomerController::class, 'search'])->name('customers.search');
 Route::post('/api/customers', [CustomerController::class, 'store'])->name('customers.store');
 
-
-
-// Show create bill form
-Route::get('/bills/create', [BillController::class, 'create'])->name('bill.create');
-
 // AJAX route for product searching
 Route::get('/api/products/search', [BillController::class, 'searchProducts'])->name('products.search');
 
 // Store final bill in DB
-Route::post('/bills', [BillController::class, 'store'])->name('bills.store');
+Route::post('api/bills', [BillController::class, 'store'])->name('bills.store');
 
 
 

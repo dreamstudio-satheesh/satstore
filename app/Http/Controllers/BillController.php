@@ -20,15 +20,7 @@ class BillController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Show the "Create Bill" page
-     * (Cart logic is handled by localStorage on the client)
-     */
-    public function create()
-    {
-        // Just return the Blade view; no cart data needed server-side
-        return view('bills.create');
-    }
+   
 
     /**
      * Search products for Select2 AJAX.
