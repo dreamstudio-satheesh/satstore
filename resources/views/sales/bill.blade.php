@@ -29,7 +29,7 @@
 
                         <div class="col-lg-3 col-sm-12 col-12">
                             <div class="form-group">
-                                <input type="number" id="item-quantity" class="form-control" placeholder="Enter quantity" value="1">
+                                <input type="number" id="item-quantity" class="form-control" placeholder="Enter quantity">
                             </div>
                         </div>
 
@@ -232,8 +232,11 @@
             handleQuantityEnter(event) {
                 if (event.key === "Enter") {
                     const product = JSON.parse(this.quantityField.dataset.product || "{}");
-                    const quantity = parseInt(this.quantityField.value);
-                    if (product.id && quantity > 0) {
+                    let quantity = parseInt(this.quantityField.value);
+                    if (isNaN(quantity) || quantity <= 0) {
+                        quantity = 1; // Default to 1 if no valid quantity is entered
+                    }
+                    if (product.id) {
                         this.addItem(product, quantity);
                         this.resetFields();
                     }
