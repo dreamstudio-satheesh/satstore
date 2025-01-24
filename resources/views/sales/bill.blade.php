@@ -432,7 +432,7 @@
         $('#customer-select').select2({
             placeholder: 'Type name or mobile...',
             ajax: {
-                url: '{{ route('customers.search', [], true) }}', // /api/customers/search
+                url: 'https://store.satsweets.com/api/customers/search', // /api/customers/search
                 dataType: 'json',
                 delay: 250,
                 data: function(params) {
