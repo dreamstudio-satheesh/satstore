@@ -63,7 +63,7 @@ class BillController extends Controller
         dd($request->all());
         $validated = $request->validate([
             'customer_id' => 'nullable|exists:customers,id',
-            'invoice_date' => 'required|date',
+            'invoice_date' => 'required|date_format:d-m-Y',
             'discount' => 'required|numeric|min:0',
             'subtotal' => 'required|numeric|min:0',
             'tax' => 'required|numeric|min:0',
