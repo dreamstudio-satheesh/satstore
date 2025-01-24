@@ -73,9 +73,9 @@ class BillController extends Controller
         ]);
     
         DB::transaction(function () use ($validated) {
-            // Insert into bills table
+            
             $bill = Bill::create([
-                'user_id' => auth()->id(),
+                'user_id' => auth()->id(), /** @Disregard [OPTIONAL_CODE] [OPTION_DESCRIPTION] */
                 'customer_id' => $validated['customer_id'],
                 'total_amount' => $validated['subtotal'],
                 'discount' => $validated['discount'],
@@ -88,7 +88,7 @@ class BillController extends Controller
                 $taxAmount = $item['price'] - $taxableValue;
                 $cgst = $taxAmount / 2;
                 $sgst = $taxAmount / 2;
-                        
+
                 $bill->items()->create([
                     'product_id' => $item['id'],
                     'quantity' => $item['quantity'],
