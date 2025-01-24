@@ -9,7 +9,7 @@ class BillItem extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['bill_id', 'product_id', 'quantity', 'price', 'gst_slab'];
+    protected $fillable = ['bill_id', 'product_id', 'quantity', 'price', 'gst_slab','taxable_value'];
 
     public function bill()
     {
