@@ -232,11 +232,15 @@
             handleQuantityEnter(event) {
                 if (event.key === "Enter") {
                     const product = JSON.parse(this.quantityField.dataset.product || "{}");
-                    const quantity = parseInt(this.quantityField.value);
-                    if (product.id && quantity > 0) {
+                    let quantity = parseInt(this.quantityField.value);
+                    if (isNaN(quantity) || quantity <= 0) {
+                        quantity = 1; // Default to 1 if no valid quantity is entered
+                    }
+                    if (product.id) {
                         this.addItem(product, quantity);
                         this.resetFields();
                     }
+
                 }
             }
 
@@ -415,7 +419,7 @@
 
             resetFields() {
                 this.searchField.value = "";
-                this.quantityField.value = "";
+                this.quantityField.value = "1";
                 this.searchField.focus();
             }
         }
