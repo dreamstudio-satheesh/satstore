@@ -545,36 +545,22 @@
 
             // Send data to the backend
             $.ajax({
-                url: '{{ route('bills.store') }}',
+                url: '{{ route('bills.store') }}', // Define a route for storing bills
                 type: 'POST',
-                data: JSON.stringify({
-                    customer_id: "1",
-                    invoice_date: "24-01-2025",
-                    discount: 0,
-                    subtotal: 20.54,
-                    tax: 2.46,
-                    total: 23,
-                    items: [{
-                        id: 1,
-                        name: "test",
-                        price: "23.00",
-                        gst_slab: "12",
-                        quantity: 1,
-                        total: 23
-                    }]
-                }),
+                data: JSON.stringify(payload),
                 contentType: 'application/json',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response) {
-                    console.log('Success:', response);
+                    alert('Sale finalized successfully!');
+                    salesManager.salesList = []; // Clear sales cart
+                    salesManager.updateSalesList(); // Refresh UI
                 },
-                error: function(xhr, status, error) {
-                    console.error('Error:', xhr.responseText);
-                }
+                error: function(xhr) {
+                    alert('Failed to finalize sale. Please try again.');
+                },
             });
-
         });
     </script>
 @endpush

@@ -60,7 +60,6 @@ class BillController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
         $validated = $request->validate([
             'customer_id' => 'nullable|exists:customers,id',
             'invoice_date' => 'required|date_format:d-m-Y',
