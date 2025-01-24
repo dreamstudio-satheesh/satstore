@@ -38,7 +38,7 @@ Route::get('/bills/create', [BillController::class, 'create'])->name('bill.creat
 Route::get('/api/products/search', [BillController::class, 'searchProducts'])->name('products.search');
 
 // Store final bill in DB
-Route::post('/bills', [BillController::class, 'store'])->name('bill.store');
+Route::post('/bills', [BillController::class, 'store'])->name('bills.store');
 
 
 
