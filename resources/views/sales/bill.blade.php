@@ -460,8 +460,7 @@
             }
         });
 
-        // Automatically set the default customer when the page loads
-        $('#customer-select').val(1).trigger('change');
+        
 
         // Auto-focus the search box when dropdown opens
         $('#customer-select').on('select2:open', function() {
