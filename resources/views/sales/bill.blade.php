@@ -198,11 +198,12 @@
 
                 // If no exact barcode match, filter products for search
                 this.filteredProducts = this.products.filter(product =>
-                    product.name_tamil.includes(query) ||
-                    (product.name_english && product.name_english.includes(query)) ||
-                    product.barcode.includes(query)
+                    product.name_tamil.toLowerCase().includes(query.toLowerCase()) ||
+                    (product.name_english && product.name_english.toLowerCase().includes(query.toLowerCase())) ||
+                    product.barcode.toLowerCase().includes(query.toLowerCase())
                 );
                 this.displayResults(this.filteredProducts);
+
                 this.currentSelectionIndex = -1;
             }
 
@@ -429,24 +430,24 @@
 
         // Customer Select2
         $('#customer-select').select2({
-                placeholder: 'Type name or mobile...',
-                ajax: {
-                    url: '{{ route('customers.search') }}', // /api/customers/search
-                    dataType: 'json',
-                    delay: 250,
-                    data: function(params) {
-                        return {
-                            term: params.term
-                        };
-                    },
-                    processResults: function(data) {
-                        // data => { results: [ {id, text}, ... ] }
-                        return {
-                            results: data
-                        };
-                    },
-                    cache: true
-                }
+            placeholder: 'Type name or mobile...',
+            ajax: {
+                url: '{{ route('customers.search') }}', // /api/customers/search
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        term: params.term
+                    };
+                },
+                processResults: function(data) {
+                    // data => { results: [ {id, text}, ... ] }
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            }
         });
 
         // 9. ADD NEW CUSTOMER MODAL//
@@ -477,8 +478,8 @@
                 }
             });
         });
-        
-        
+
+
         // Set current date in DD-MM-YYYY format
         const currentDate = new Date();
         const formattedDate = currentDate.toLocaleDateString('en-GB').replace(/\//g, '-'); // Formats as DD-MM-YYYY
