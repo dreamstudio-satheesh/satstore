@@ -491,6 +491,9 @@
                 url: '{{ route('customers.store') }}', // Endpoint to create a new customer
                 type: 'POST',
                 data: formData,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'), // CSRF protection
+                },
                 success: function(response) {
                     // Add new customer to the Select2 dropdown
                     const newOption = new Option(response.text, response.id, false, true);
