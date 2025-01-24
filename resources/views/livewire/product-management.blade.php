@@ -80,7 +80,7 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Name (Tamil)</th>
-                                <th>Name (English)</th>
+                                <th>Code</th>
                                 <th>Price</th>
                                 <th>GST Slab</th>
                                 <th>Actions</th>
@@ -91,7 +91,7 @@
                                 <tr @if($product->id == $productId) class="table-primary" @endif>
                                     <td>{{ ($products->currentPage() - 1) * $products->perPage() + $loop->index + 1 }}</td>
                                     <td>{{ $product->name_tamil }}</td>
-                                    <td>{{ $product->name_english }}</td>
+                                    <td>{{ $product->barcode }}</td>
                                     <td>{{ $product->price }}</td>
                                     <td>{{ $product->gst_slab }}%</td>
                                     <td>
