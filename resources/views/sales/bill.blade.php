@@ -451,7 +451,13 @@
                 },
                 cache: true
             },
-            minimumInputLength: 3
+            minimumInputLength: 3,
+            initSelection: function(element, callback) {
+                callback({
+                    id: 1,
+                    text: 'Cash Bill'
+                }); // Preload the default customer
+            }
         });
 
         // Automatically set the default customer when the page loads
