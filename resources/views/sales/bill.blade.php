@@ -428,31 +428,32 @@
         });
 
 
-        // Initialize Select2
-        $('#customer-select').select2({
-            placeholder: 'Type name or mobile...',
-            ajax: {
-                url: '{{ route('customers.search') }}', // API endpoint
-                dataType: 'json',
-                delay: 250,
-                data: function(params) {
-                    if (params.term && params.term.length >= 3) {
-                        return {
-                            term: params.term
-                        };
-                    }
-                    return {};
+        $('#newCustomerForm').on('submit', function(e) {
+            e.preventDefault();
+
+            // Collect form data
+            const formData = $(this).serialize();
+
+            // Submit data via AJAX
+            $.ajax({
+                url: '{{ route('customers.store') }}', // Endpoint to create a new customer
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    // Add new customer to the Select2 dropdown
+                    const newOption = new Option(response.text, response.id, false, true);
+                    $('#customer-select').append(newOption).trigger('change');
+
+                    // Close the modal
+                    $('#addCustomerModal').modal('hide');
                 },
-                processResults: function(data) {
-                    return {
-                        results: data
-                    };
-                },
-                cache: true
-            },
-            minimumInputLength: 3
+                error: function(err) {
+                    alert('Failed to create customer. Please try again.');
+                }
+            });
         });
 
+        
         // Auto-focus the search box when dropdown opens
         $('#customer-select').on('select2:open', function() {
             const searchField = document.querySelector('.select2-search__field'); // Select the search box
