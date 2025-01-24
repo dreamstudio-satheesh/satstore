@@ -52,7 +52,7 @@ class ProductManagement extends Component
         $this->hsn_code = '';
         $this->price = null;
         $this->gst_slab = '18';
-        $this->barcode = '';
+        $this->barcode ;
         $this->search = '';
     }
 
