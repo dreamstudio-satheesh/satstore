@@ -29,7 +29,7 @@
 
                         <div class="col-lg-3 col-sm-12 col-12">
                             <div class="form-group">
-                                <input type="number" id="item-quantity" class="form-control" placeholder="Enter quantity">
+                                <input type="number" id="item-quantity" class="form-control" value="1" placeholder="Enter quantity">
                             </div>
                         </div>
 
