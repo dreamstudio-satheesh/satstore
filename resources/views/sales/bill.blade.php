@@ -475,7 +475,7 @@
 
 
 
-        
+
 
 
         // 9. ADD NEW CUSTOMER MODAL//
@@ -550,7 +550,7 @@
                 data: JSON.stringify(payload),
                 contentType: 'application/json',
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'), // CSRF protection
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response) {
                     alert('Sale finalized successfully!');
