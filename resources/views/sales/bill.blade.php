@@ -436,19 +436,26 @@
                 dataType: 'json',
                 delay: 250,
                 data: function(params) {
-                    return {
-                        term: params.term
-                    };
+                    // Ensure the search starts only if 3 or more characters are typed
+                    if (params.term && params.term.length >= 3) {
+                        return {
+                            term: params.term // Pass the search term
+                        };
+                    }
+                    // If less than 3 characters, return an empty object to avoid unnecessary calls
+                    return {};
                 },
                 processResults: function(data) {
-                    // data => { results: [ {id, text}, ... ] }
+                    // Format the returned data to match Select2's structure
                     return {
-                        results: data
+                        results: data // Assuming data is already in the required format
                     };
                 },
                 cache: true
-            }
+            },
+            minimumInputLength: 3 // Enforce minimum input length for better UX
         });
+
 
         // 9. ADD NEW CUSTOMER MODAL//
 
