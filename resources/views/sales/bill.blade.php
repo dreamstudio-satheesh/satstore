@@ -423,7 +423,7 @@
         // Initialize the Sales Manager
         document.addEventListener("DOMContentLoaded", () => {
             const products = @json($products); // Pass your product data from the server
-            const salesManager = new SalesManager();
+            window.salesManager = new SalesManager();
             salesManager.products = products; // Set products for the manager
         });
 
@@ -465,9 +465,6 @@
             $('#customer-select').append(newOption).trigger('change');
         });
 
-
-
-
         // Auto-focus the search box when dropdown opens
         $('#customer-select').on('select2:open', function() {
             const searchField = document.querySelector('.select2-search__field'); // Select the search box
@@ -476,6 +473,9 @@
             }
         });
 
+
+
+        
 
 
         // 9. ADD NEW CUSTOMER MODAL//
