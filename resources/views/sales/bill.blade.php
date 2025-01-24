@@ -444,7 +444,6 @@
                     return {};
                 },
                 processResults: function(data) {
-
                     return {
                         results: data
                     };
@@ -454,7 +453,20 @@
             minimumInputLength: 3
         });
 
-        
+        // Set "Cash Bill" as the default customer on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const defaultCustomer = {
+                id: 1,
+                text: 'Cash Bill'
+            }; // Default customer details
+
+            // Add the default customer as an option
+            const newOption = new Option(defaultCustomer.text, defaultCustomer.id, true, true);
+            $('#customer-select').append(newOption).trigger('change');
+        });
+
+
+
 
         // Auto-focus the search box when dropdown opens
         $('#customer-select').on('select2:open', function() {
