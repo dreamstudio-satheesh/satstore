@@ -3,23 +3,15 @@
 namespace App\Http\Livewire;
 
 use App\Models\Product;
-use Livewire\Component;
 use App\Models\Category;
+use Livewire\Component;
 use Livewire\WithPagination;
 
 class ProductManagement extends Component
 {
     use WithPagination;
 
-    public $productId;
-    public $name_tamil;
-    public $name_english;
-    public $category_id=1;
-    public $hsn_code;
-    public $price;
-    public $gst_slab = '12';
-    public $barcode;
-    public $search = '';
+    public $productId, $name_tamil, $name_english, $category_id=1, $hsn_code, $price, $gst_slab = '12', $barcode, $search = '';
 
     protected $rules = [
         'name_tamil' => 'required|string|max:255',
@@ -31,16 +23,14 @@ class ProductManagement extends Component
         'barcode' => 'required|string|unique:products,barcode',
     ];
 
-    public function render()
+    public function mount()
     {
-        $products = Product::where('name_tamil', 'like', '%' . $this->search . '%')
-            ->orWhere('name_english', 'like', '%' . $this->search . '%')
-            ->orderBy('id', 'asc')
-            ->paginate(10);
-        
-        $categories= Category::orderBy('name')->get();
+        $this->category_id = Category::first()?->id ?? null;
+    }
 
-        return view('livewire.product-management', compact('products','categories'));
+    public function updatedSearch()
+    {
+        $this->resetPage();
     }
 
     public function resetInputFields()
@@ -48,18 +38,18 @@ class ProductManagement extends Component
         $this->productId = null;
         $this->name_tamil = '';
         $this->name_english = '';
-        $this->category_id = null;
+        $this->category_id = Category::first()?->id ?? null;
         $this->hsn_code = '';
         $this->price = null;
         $this->gst_slab = '18';
-        $this->barcode ;
-        $this->search = '';
+        $this->barcode = '';
     }
 
     public function store()
     {
-
-        $this->validate();
+        $this->validate([
+            'barcode' => 'required|string|unique:products,barcode,' . $this->productId,
+        ] + $this->rules);
 
         Product::updateOrCreate(['id' => $this->productId], [
             'name_tamil' => $this->name_tamil,
@@ -92,5 +82,17 @@ class ProductManagement extends Component
     {
         Product::findOrFail($id)->delete();
         session()->flash('message', 'Product deleted successfully!');
+    }
+
+    public function render()
+    {
+        $products = Product::where('name_tamil', 'like', '%' . $this->search . '%')
+            ->orWhere('name_english', 'like', '%' . $this->search . '%')
+            ->orderBy('id', 'asc')
+            ->paginate(10);
+
+        $categories = Category::orderBy('name')->get();
+
+        return view('livewire.product-management', compact('products', 'categories'));
     }
 }

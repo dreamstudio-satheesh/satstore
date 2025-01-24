@@ -1,9 +1,7 @@
 <div class="content">
     <div class="row">
-
-
         <!-- Create/Update Product Form -->
-        <div class="col-lg-4 col-md-4  col-sm-10">
+        <div class="col-lg-4 col-md-4 col-sm-10">
             <div class="card">
                 <div class="card-header">
                     <h5>{{ $productId ? 'Edit Product' : 'Create Product' }}</h5>
@@ -11,14 +9,14 @@
                 <div class="card-body">
                     <form wire:submit.prevent="store">
                         <div class="form-group">
-                            <input type="text" class="form-control" wire:model="name_tamil" placeholder="Name (Tamil)" accesskey="n" autofocus>
+                            <input type="text" class="form-control" wire:model="name_tamil" placeholder="Name (Tamil)" autofocus>
                             @error('name_tamil') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" wire:model="name_english" placeholder="Name (English)">
                             @error('name_english') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
-                       {{--  <div class="form-group">
+                        <div class="form-group">
                             <select class="form-control" wire:model="category_id">
                                 <option value="">Select a Category</option>
                                 @foreach ($categories as $category)
@@ -26,7 +24,7 @@
                                 @endforeach
                             </select>
                             @error('category_id') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div> --}}
+                        </div>
                         <div class="form-group">
                             <input type="text" class="form-control" wire:model="hsn_code" placeholder="HSN Code">
                             @error('hsn_code') <span class="text-danger">{{ $message }}</span> @enderror
@@ -50,22 +48,24 @@
                         </div>
 
                         <div class="pt-3">
-                            <button type="submit" class="btn btn-rounded btn-secondary">Save</button>
-                            <button type="button" wire:click="resetInputFields" class="btn btn-rounded btn-warning">Cancel</button>
+                            <button type="submit" class="btn btn-rounded btn-secondary" wire:loading.attr="disabled">
+                                Save <span wire:loading wire:target="store" class="spinner-border spinner-border-sm"></span>
+                            </button>
+                            <button type="button" wire:click="resetInputFields" class="btn btn-rounded btn-warning">
+                                Cancel
+                            </button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
 
-
         <!-- Products List -->
         <div class="col-lg-8 col-md-8 col-sm-12">
             <div class="card">
                 <div class="card-header">
                     <h5>Products</h5>
-                    <input id="searchInput" wire:model.live.debounce.300ms="search" type="text" class="form-control"
-                        placeholder="Search Products..." accesskey="s">
+                    <input id="searchInput" wire:model.debounce.300ms="search" type="text" class="form-control" placeholder="Search Products...">
                 </div>
                 <div class="card-body">
                     @if (session()->has('message'))
@@ -88,14 +88,14 @@
                         </thead>
                         <tbody>
                             @forelse ($products as $product)
-                                <tr>
+                                <tr @if($product->id == $productId) class="table-primary" @endif>
                                     <td>{{ ($products->currentPage() - 1) * $products->perPage() + $loop->index + 1 }}</td>
                                     <td>{{ $product->name_tamil }}</td>
                                     <td>{{ $product->name_english }}</td>
                                     <td>{{ $product->price }}</td>
                                     <td>{{ $product->gst_slab }}%</td>
                                     <td>
-                                        <button wire:click="edit({{ $product->id }})" class="btn btn-primary btn-sm"  accesskey="{{ $loop->index < 9 ? $loop->index + 1 : 0 }}">Edit</button>
+                                        <button wire:click="edit({{ $product->id }})" class="btn btn-primary btn-sm">Edit</button>
                                         <button wire:click="delete({{ $product->id }})" class="btn btn-danger btn-sm">Delete</button>
                                     </td>
                                 </tr>
@@ -110,7 +110,6 @@
                 </div>
             </div>
         </div>
-
-        
     </div>
 </div>
+
