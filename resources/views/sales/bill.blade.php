@@ -451,13 +451,7 @@
                 },
                 cache: true
             },
-            minimumInputLength: 3,
-            initSelection: function(element, callback) {
-                callback({
-                    id: 1,
-                    text: 'Cash Bill'
-                }); // Preload the default customer
-            }
+            minimumInputLength: 3
         });
 
         
