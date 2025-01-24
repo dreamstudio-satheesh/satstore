@@ -13,6 +13,8 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ url('') }}/assets/img/favicon.png">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ url('') }}/assets/css/bootstrap.min.css">
 
