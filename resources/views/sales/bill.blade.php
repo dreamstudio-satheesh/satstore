@@ -428,6 +428,44 @@
         });
 
 
+        // Initialize Select2
+        $('#customer-select').select2({
+            placeholder: 'Type name or mobile...',
+            ajax: {
+                url: '{{ route('customers.search') }}', // API endpoint
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    if (params.term && params.term.length >= 3) {
+                        return {
+                            term: params.term
+                        };
+                    }
+                    return {};
+                },
+                processResults: function(data) {
+
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            },
+            minimumInputLength: 3
+        });
+
+        // Auto-focus the search box when dropdown opens
+        $('#customer-select').on('select2:open', function() {
+            const searchField = document.querySelector('.select2-search__field'); // Select the search box
+            if (searchField) {
+                searchField.focus(); // Focus the search box
+            }
+        });
+
+
+
+        // 9. ADD NEW CUSTOMER MODAL//
+
         $('#newCustomerForm').on('submit', function(e) {
             e.preventDefault();
 
@@ -453,45 +491,6 @@
             });
         });
 
-        
-        // Auto-focus the search box when dropdown opens
-        $('#customer-select').on('select2:open', function() {
-            const searchField = document.querySelector('.select2-search__field'); // Select the search box
-            if (searchField) {
-                searchField.focus(); // Focus the search box
-            }
-        });
-
-
-
-        // 9. ADD NEW CUSTOMER MODAL//
-
-        $('#newCustomerForm').on('submit', function(e) {
-            e.preventDefault();
-
-            // Collect form data: name, mobile, etc.
-            let formData = $(this).serialize();
-
-            // POST to your existing route: /api/customers
-            $.ajax({
-                url: '{{ route('customers.store') }}', // /api/customers
-                type: 'POST',
-                data: formData,
-                success: function(response) {
-                    // response => { id, text } (you can define how you return it)
-                    let newOption = new Option(response.text, response.id, false, true);
-                    $('#customer-select').append(newOption).trigger('change');
-
-                    // Close modal
-                    $('#addCustomerModal').modal('hide');
-                    // Reset form
-                    $('#newCustomerForm')[0].reset();
-                },
-                error: function(err) {
-                    alert('Failed to create customer. ' + err.responseText);
-                }
-            });
-        });
 
 
         // Set current date in DD-MM-YYYY format
