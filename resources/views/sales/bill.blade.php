@@ -428,33 +428,39 @@
         });
 
 
-        // Customer Select2
+        // Initialize Select2
         $('#customer-select').select2({
             placeholder: 'Type name or mobile...',
             ajax: {
-                url: '{{ route('customers.search') }}', // /api/customers/search
+                url: '{{ route('customers.search') }}', // API endpoint
                 dataType: 'json',
                 delay: 250,
                 data: function(params) {
-                    // Ensure the search starts only if 3 or more characters are typed
                     if (params.term && params.term.length >= 3) {
                         return {
-                            term: params.term // Pass the search term
+                            term: params.term
                         };
                     }
-                    // If less than 3 characters, return an empty object to avoid unnecessary calls
                     return {};
                 },
                 processResults: function(data) {
-                    // Format the returned data to match Select2's structure
                     return {
-                        results: data // Assuming data is already in the required format
+                        results: data
                     };
                 },
                 cache: true
             },
-            minimumInputLength: 3 // Enforce minimum input length for better UX
+            minimumInputLength: 3
         });
+
+        // Auto-focus the search box when dropdown opens
+        $('#customer-select').on('select2:open', function() {
+            const searchField = document.querySelector('.select2-search__field'); // Select the search box
+            if (searchField) {
+                searchField.focus(); // Focus the search box
+            }
+        });
+
 
 
         // 9. ADD NEW CUSTOMER MODAL//
