@@ -38,7 +38,7 @@
 
 
                 </div>
-                <div id="scrollable-container">
+                <div id="scrollable-container" style="max-width: 80%">
                     <table class="table table-bordered">
                         <thead class="thead-dark">
                             <tr>
