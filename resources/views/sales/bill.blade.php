@@ -138,7 +138,6 @@
 
         #search-results {
             position: absolute;
-            top: -200px;
             z-index: 1000;
             background-color: white;
             border: 1px solid #ccc;
