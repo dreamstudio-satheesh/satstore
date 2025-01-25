@@ -34,10 +34,9 @@
                         </div>
                     </div>
 
-
-
-
                 </div>
+
+
                 <div id="scrollable-container" style="max-width: 1200px">
                     <table class="table table-bordered">
                         <thead class="thead-dark">
@@ -350,7 +349,7 @@
                             <input 
                                 type="number" 
                                 class="form-control quantity-input" 
-                                style="max-width:150px"
+                                style="max-width:100px"
                                 data-index="${index}" 
                                 value="${item.quantity}" 
                                 min="1"
