@@ -37,10 +37,7 @@
                 </div>
 
             </div>
-        </div>
-
-        <!-- Sales List -->
-        <div class="card mb-3">
+       
             <div class="card-body">
                 <h5 class="card-title">Sales List</h5>
                 <table class="table table-bordered">
