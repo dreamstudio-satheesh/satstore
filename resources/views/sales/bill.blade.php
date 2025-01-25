@@ -31,6 +31,7 @@
 
                     <div class="col-lg-2 col-sm-12 col-12">
                         <div class="form-group">
+                            <label for="">Quantity</label>
                             <input type="number" id="item-quantity" class="form-control" style="max-width: 140px"
                                 placeholder="Enter quantity">
                         </div>
@@ -155,6 +156,8 @@
             padding-left: 60px;
             max-height: 160px;
             overflow-y: auto;
+
+            right: 120px; /* Move the dropdown 200px from the right edge */
         }
 
         #search-results .dropdown-item {
