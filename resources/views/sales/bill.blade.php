@@ -37,8 +37,8 @@
                 </div>
 
 
-                <div id="scrollable-container" style="max-width: 1200px">
-                    <table class="table table-bordered">
+                <div id="scrollable-container sales-page">
+                    <table class="table  table-bordered">
                         <thead class="thead-dark">
                             <tr>
                                 <th>Item Name</th>
@@ -128,7 +128,7 @@
 @push('styles')
     <style>
         .sales-page {
-            max-width: 1400px;
+            max-width: 900px;
             margin: auto;
         }
 
