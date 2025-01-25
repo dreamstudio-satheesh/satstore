@@ -61,9 +61,11 @@
                     <div class="col-6">
                         <h5 class="card-title">Summary</h5>
                     </div>
-                    <div class="col-6"> 
-                         <span>Total Products in Cart: </span>
+                    <div class="col-3">
+                        <span>Total Products in Cart: </span>
                         <span id="cart-product-count">0</span>
+                    </div>
+                    <div class="col-3">
                         <span>Total Items in Cart: </span>
                         <span id="cart-item-count">0</span>
                     </div>
