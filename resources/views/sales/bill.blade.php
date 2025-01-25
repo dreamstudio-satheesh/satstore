@@ -13,7 +13,7 @@
                 <div class="row">
 
                     @include('sales.bill-customer')
-                    
+
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="form-group">
                             <div class="input-groupicon">
@@ -28,7 +28,7 @@
 
                     </div>
 
-                    <div class="col-lg-3 col-sm-12 col-12">
+                    <div class="col-lg-2 col-sm-12 col-12">
                         <div class="form-group">
                             <input type="number" id="item-quantity" class="form-control" placeholder="Enter quantity">
                         </div>
