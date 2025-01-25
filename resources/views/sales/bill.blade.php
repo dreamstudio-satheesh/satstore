@@ -13,9 +13,8 @@
                 <div class="row">
 
                     @include('sales.bill-customer')
-                    <div class="col-lg-1 col-sm-1 col-1"></div>
 
-                    <div class="col-lg-2 col-sm-6 col-12">
+                    <div class="col-lg-3 col-sm-6 col-12">
                         <div class="form-group">
                             <div class="input-groupicon">
                                 <input type="text" id="product-search" placeholder="Scan/Search Product ..." accesskey="s"
