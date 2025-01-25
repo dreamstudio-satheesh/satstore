@@ -152,8 +152,8 @@
             list-style: none;
             margin: 0;
             padding: 0;
-            width: 340px;
-            padding-left: 60px;
+            width: 300px;
+            margin-left: 60px;
             max-height: 160px;
             overflow-y: auto;
         }
