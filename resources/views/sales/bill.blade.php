@@ -16,7 +16,7 @@
 
 
                     <div class="col-lg-4 col-sm-6 col-12">
-                        <div class="mt-3">
+                        <div class="mt-4">
                             <div class="form-group">
                                 <div class="input-groupicon">
                                     <input type="text" id="product-search" placeholder="Scan/Search Product ..."
