@@ -4,12 +4,11 @@
 @section('content')
     <div class="content">
 
-      
-        <div class="container mt-4 sales-page">
-            <!-- Input Section -->
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">Add Item to Sale</h5>
+
+        <!-- Sales  -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <h5 class="card-title">Add Item to Sale</h5>
 
                     <div class="row">
                         <div class="col-lg-3 col-sm-6 col-12">
@@ -34,10 +33,8 @@
 
 
                     </div>
-                </div>
 
             </div>
-       
             <div class="card-body">
                 <h5 class="card-title">Sales List</h5>
                 <table class="table table-bordered">
