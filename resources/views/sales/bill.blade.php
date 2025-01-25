@@ -8,12 +8,9 @@
         <!-- Sales  -->
         <div class="card mb-3">
             <div class="card-body">
-                <h5 class="card-title">Add Item to Sale</h5>
 
                 <div class="row">
-
                     @include('sales.bill-customer')
-
 
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="form-group mt-4">
