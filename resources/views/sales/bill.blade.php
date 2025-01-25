@@ -16,23 +16,20 @@
 
 
                     <div class="col-lg-4 col-sm-6 col-12">
-                        <div class="mt-4">
-                            <div class="form-group">
-                                <div class="input-groupicon">
-                                    <input type="text" id="product-search" placeholder="Scan/Search Product ..."
-                                        accesskey="s" autofocus>
-                                    <div class="addonset">
-                                        <img src="assets/img/icons/scanners.svg" alt="img">
-                                    </div>
+                        <div class="form-group mt-4">
+                            <div class="input-groupicon">
+                                <input type="text" id="product-search" placeholder="Scan/Search Product ..." accesskey="s"
+                                    autofocus>
+                                <div class="addonset">
+                                    <img src="assets/img/icons/scanners.svg" alt="img">
                                 </div>
-                                <ul id="search-results" class="dropdown-menu" style="display: none;"></ul>
                             </div>
+                            <ul id="search-results" class="dropdown-menu" style="display: none;"></ul>
                         </div>
-
                     </div>
 
                     <div class="col-lg-2 col-sm-12 col-12">
-                        <div class="form-group">
+                        <div class="form-group mt-4">
                             <input type="number" id="item-quantity" class="form-control" style="max-width: 140px"
                                 placeholder="Enter quantity">
                         </div>
