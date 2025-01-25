@@ -14,8 +14,8 @@
 
                     @include('sales.bill-customer')
 
-                    <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="form-group">
+                    <div class="col-lg-4 col-sm-6 col-12">
+                        <div class="form-group" style="right: 120px;">
                             <div class="input-groupicon">
                                 <label for="">Search Or Scan</label>
                                 <input type="text" id="product-search" placeholder="Scan/Search Product ..." accesskey="s"
@@ -156,8 +156,6 @@
             padding-left: 60px;
             max-height: 160px;
             overflow-y: auto;
-
-            right: 120px; /* Move the dropdown 200px from the right edge */
         }
 
         #search-results .dropdown-item {
