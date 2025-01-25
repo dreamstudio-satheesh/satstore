@@ -7,7 +7,7 @@
 
         <!-- Sales  -->
         <div class="card mb-3">
-            <div class="card-header">
+            <div class="card-body">
                 <h5 class="card-title">Add Item to Sale</h5>
 
                     <div class="row">
@@ -33,9 +33,7 @@
 
 
                     </div>
-
-            </div>
-            <div class="card-body">
+            
                 <h5 class="card-title">Sales List</h5>
                 <table class="table table-bordered">
                     <thead class="thead-dark">
