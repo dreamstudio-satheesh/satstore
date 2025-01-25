@@ -153,7 +153,6 @@
             width: 340px;
             max-height: 160px;
             overflow-y: auto;
-            left: 50px;
         }
 
         #search-results .dropdown-item {
