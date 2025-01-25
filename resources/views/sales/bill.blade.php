@@ -30,30 +30,33 @@
 
                     <div class="col-lg-2 col-sm-12 col-12">
                         <div class="form-group">
-                            <input type="number" id="item-quantity" class="form-control" style="max-width: 140px" placeholder="Enter quantity">
+                            <input type="number" id="item-quantity" class="form-control" style="max-width: 140px"
+                                placeholder="Enter quantity">
                         </div>
                     </div>
 
                 </div>
 
+                <div class="sales-page">
+                    <div id="scrollable-container">
+                        <table class="table table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Item Name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sales-items">
+                                <!-- Dynamically added rows -->
+                            </tbody>
+                        </table>
 
-                <div id="scrollable-container">
-                    <table class="sales-page table  table-bordered">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Item Name</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="sales-items">
-                            <!-- Dynamically added rows -->
-                        </tbody>
-                    </table>
-
+                    </div>
                 </div>
+
 
             </div>
         </div>
@@ -109,7 +112,7 @@
             </div>
         </div>
 
-        
+
 
 
         <!-- Action Buttons -->
@@ -162,8 +165,6 @@
             background-color: #007bff;
             color: white;
         }
-
-       
     </style>
 @endpush
 
