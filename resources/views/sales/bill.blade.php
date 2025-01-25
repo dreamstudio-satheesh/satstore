@@ -35,7 +35,7 @@
                 </div>
 
                 <h5 class="card-title">Sales List</h5>
-                <div class="vertical-scroll scroll-demo">
+                <div id="scrollable-container" >
                     <table class="table table-bordered">
                         <thead class="thead-dark">
                             <tr>
