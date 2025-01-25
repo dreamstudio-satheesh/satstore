@@ -45,7 +45,7 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody id="sales-items">
+                   <tbody class="vertical-scroll scroll-demo" id="sales-items">
                         <!-- Dynamically added rows -->
                     </tbody>
                 </table>
