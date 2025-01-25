@@ -284,7 +284,7 @@
             displayResults(results) {
                 this.searchResults.innerHTML = "";
                 // Limit results to a maximum of 6
-                const limitedResults = results.slice(0, 6);
+                const limitedResults = results.slice(0, 10);
 
                 if (limitedResults.length > 0) {
                     limitedResults.forEach((product, index) => {
