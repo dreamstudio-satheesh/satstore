@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2 col-sm-6 col-12">
+            <div class="col-lg-3 col-sm-6 col-12">
                 <div class="form-group">
                     <label>Invoice Date </label>
                     <div class="input-groupicon">
