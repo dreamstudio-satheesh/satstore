@@ -35,20 +35,24 @@
                     </div>
             
                 <h5 class="card-title">Sales List</h5>
-                <table class="table table-bordered">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Item Name</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                   <tbody class="vertical-scroll scroll-demo" id="sales-items">
-                        <!-- Dynamically added rows -->
-                    </tbody>
-                </table>
+                <div class=" class="vertical-scroll scroll-demo">
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Item Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                       <tbody id="sales-items">
+                            <!-- Dynamically added rows -->
+                        </tbody>
+                    </table>
+
+                </div>
+               
             </div>
         </div>
 
