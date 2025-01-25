@@ -33,8 +33,6 @@
 
 
                 </div>
-
-                <h5 class="card-title">Sales List</h5>
                 <div id="scrollable-container" >
                     <table class="table table-bordered">
                         <thead class="thead-dark">
@@ -517,7 +515,7 @@
 
         $(function() {
             $('#scrollable-container').slimScroll({
-                height: '200px',
+                height: '240px',
                 color: '#000',
                 size: '8px',
                 alwaysVisible: true
