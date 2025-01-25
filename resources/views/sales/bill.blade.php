@@ -251,7 +251,6 @@
                     this.updateSelection();
                 } else if (event.key === "Enter" && this.currentSelectionIndex >= 0) {
                     this.selectProduct(this.filteredProducts[this.currentSelectionIndex]);
-                    this.searchResults.style.display = "none";
                 }
             }
 
