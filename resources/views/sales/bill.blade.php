@@ -204,11 +204,11 @@
                 });
 
                 // Ensure search results remain visible when focused again
-                this.searchField.addEventListener("focus", () => {
+                /* this.searchField.addEventListener("focus", () => {
                     if (this.filteredProducts.length > 0) {
                         this.searchResults.style.display = "block";
                     }
-                });
+                }); */
             }
 
             handleSearchInput(event) {
