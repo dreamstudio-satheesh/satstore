@@ -151,8 +151,8 @@
             list-style: none;
             margin: 0;
             padding: 0;
-            width: 100%;
-            max-height: 200px;
+            width: 240px;
+            max-height: 160px;
             overflow-y: auto;
         }
 
