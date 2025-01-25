@@ -17,7 +17,7 @@
                     <div class="col-lg-4 col-sm-6 col-12">
                         <div class="form-group">
                             <div class="input-groupicon">
-                                <label for=""></label>
+                                <label for="">.</label>
                                 <input type="text" id="product-search" placeholder="Scan/Search Product ..." accesskey="s"
                                     autofocus>
                                 <div class="addonset">
