@@ -153,7 +153,7 @@
             margin: 0;
             padding: 0;
             width: 300px;
-            margin-left: 60px;
+            margin-left: 140px;
             max-height: 160px;
             overflow-y: auto;
         }
