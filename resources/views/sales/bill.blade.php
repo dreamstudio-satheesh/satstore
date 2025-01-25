@@ -30,7 +30,7 @@
 
                     <div class="col-lg-2 col-sm-12 col-12">
                         <div class="form-group">
-                            <input type="number" id="item-quantity" class="form-control" placeholder="Enter quantity">
+                            <input type="number" id="item-quantity" class="form-control" style="max-width: 140px" placeholder="Enter quantity">
                         </div>
                     </div>
 
