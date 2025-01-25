@@ -58,10 +58,13 @@
         <div class="card mb-3">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-9">
+                    <div class="col-6">
                         <h5 class="card-title">Summary</h5>
                     </div>
-                    <div class="col-3"> <span>Total Items in Cart: </span>
+                    <div class="col-6"> 
+                         <span>Total Products in Cart: </span>
+                        <span id="cart-product-count">0</span>
+                        <span>Total Items in Cart: </span>
                         <span id="cart-item-count">0</span>
                     </div>
                 </div>
@@ -360,6 +363,10 @@
                 // Update total cart items count
                 const totalItems = this.calculateTotalItems();
                 document.getElementById("cart-item-count").textContent = totalItems;
+
+                // Update total products count
+                const totalProducts = this.salesList.length;
+                document.getElementById("cart-product-count").textContent = totalProducts;
             }
 
             handleQuantityChange(event) {
