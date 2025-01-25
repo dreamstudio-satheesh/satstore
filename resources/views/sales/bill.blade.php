@@ -150,9 +150,10 @@
             list-style: none;
             margin: 0;
             padding: 0;
-            width: 240px;
+            width: 340px;
             max-height: 160px;
             overflow-y: auto;
+            left: 50px;
         }
 
         #search-results .dropdown-item {
