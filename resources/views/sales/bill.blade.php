@@ -57,7 +57,14 @@
         <!-- Summary Section -->
         <div class="card mb-3">
             <div class="card-body">
-                <h5 class="card-title">Summary</h5>
+                <div class="row">
+                    <div class="col-6">
+                        <h5 class="card-title">Summary</h5>
+                    </div>
+                    <div class="col-6"> <span>Total Items in Cart: </span>
+                        <span id="cart-item-count">0</span>
+                    </div>
+                </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -259,6 +266,7 @@
                 }
             }
 
+
             displayResults(results) {
                 this.searchResults.innerHTML = "";
                 // Limit results to a maximum of 6
@@ -348,6 +356,10 @@
                 });
 
                 this.calculateTotals();
+
+                // Update total cart items count
+                const totalItems = this.calculateTotalItems();
+                document.getElementById("cart-item-count").textContent = totalItems;
             }
 
             handleQuantityChange(event) {
@@ -421,6 +433,14 @@
                     `;
                     taxBreakupContainer.appendChild(row);
                 });
+            }
+
+            calculateTotalItems() {
+                let totalItems = 0;
+                this.salesList.forEach(item => {
+                    totalItems += item.quantity;
+                });
+                return totalItems;
             }
 
 
