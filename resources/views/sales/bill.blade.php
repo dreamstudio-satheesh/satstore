@@ -4,8 +4,7 @@
 @section('content')
     <div class="content">
 
-        @include('sales.bill-customer')
-
+      
         <div class="container mt-4 sales-page">
             <!-- Input Section -->
             <div class="card mb-3">
@@ -99,6 +98,9 @@
 
             </div>
         </div>
+
+        @include('sales.bill-customer')
+
 
         <!-- Action Buttons -->
         <div class="text-right">
