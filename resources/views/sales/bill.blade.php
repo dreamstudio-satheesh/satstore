@@ -58,10 +58,10 @@
         <div class="card mb-3">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-9">
                         <h5 class="card-title">Summary</h5>
                     </div>
-                    <div class="col-6"> <span>Total Items in Cart: </span>
+                    <div class="col-3"> <span>Total Items in Cart: </span>
                         <span id="cart-item-count">0</span>
                     </div>
                 </div>
