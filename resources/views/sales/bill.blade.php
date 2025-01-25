@@ -10,32 +10,32 @@
             <div class="card-body">
                 <h5 class="card-title">Add Item to Sale</h5>
 
-                    <div class="row">
-                        <div class="col-lg-3 col-sm-6 col-12">
-                            <div class="form-group">
-                                <div class="input-groupicon">
-                                    <input type="text" id="product-search" placeholder="Scan/Search Product ..."
-                                        accesskey="s" autofocus>
-                                    <div class="addonset">
-                                        <img src="assets/img/icons/scanners.svg" alt="img">
-                                    </div>
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <div class="input-groupicon">
+                                <input type="text" id="product-search" placeholder="Scan/Search Product ..." accesskey="s"
+                                    autofocus>
+                                <div class="addonset">
+                                    <img src="assets/img/icons/scanners.svg" alt="img">
                                 </div>
-                                <ul id="search-results" class="dropdown-menu" style="display: none;"></ul>
                             </div>
-
+                            <ul id="search-results" class="dropdown-menu" style="display: none;"></ul>
                         </div>
-
-                        <div class="col-lg-3 col-sm-12 col-12">
-                            <div class="form-group">
-                                <input type="number" id="item-quantity" class="form-control" placeholder="Enter quantity">
-                            </div>
-                        </div>
-
 
                     </div>
-            
+
+                    <div class="col-lg-3 col-sm-12 col-12">
+                        <div class="form-group">
+                            <input type="number" id="item-quantity" class="form-control" placeholder="Enter quantity">
+                        </div>
+                    </div>
+
+
+                </div>
+
                 <h5 class="card-title">Sales List</h5>
-                <div class=" class="vertical-scroll scroll-demo">
+                <div class="vertical-scroll scroll-demo">
                     <table class="table table-bordered">
                         <thead class="thead-dark">
                             <tr>
@@ -46,13 +46,13 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                       <tbody id="sales-items">
+                        <tbody id="sales-items">
                             <!-- Dynamically added rows -->
                         </tbody>
                     </table>
 
                 </div>
-               
+
             </div>
         </div>
 
@@ -514,6 +514,15 @@
 
         // Set the value of the invoice date input
         $('#invoice-date').val(formattedDate);
+
+        $(function() {
+            $('#scrollable-container').slimScroll({
+                height: '200px',
+                color: '#000',
+                size: '8px',
+                alwaysVisible: true
+            });
+        });
 
 
 
