@@ -11,6 +11,9 @@
                 <h5 class="card-title">Add Item to Sale</h5>
 
                 <div class="row">
+
+                    @include('sales.bill-customer')
+                    
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="form-group">
                             <div class="input-groupicon">
@@ -30,6 +33,8 @@
                             <input type="number" id="item-quantity" class="form-control" placeholder="Enter quantity">
                         </div>
                     </div>
+
+
 
 
                 </div>
@@ -105,7 +110,7 @@
             </div>
         </div>
 
-        @include('sales.bill-customer')
+        
 
 
         <!-- Action Buttons -->

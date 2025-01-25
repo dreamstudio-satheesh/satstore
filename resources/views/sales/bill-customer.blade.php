@@ -1,6 +1,4 @@
-<div class="card">
-    <div class="card-body">
-        <div class="row">
+
             <div class="col-lg-3 col-sm-6 col-12">
                 <div class="form-group">
                     <label for="customer-select">Customer</label>
@@ -34,18 +32,9 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-sm-6 col-12">
-                <div class="form-group">
-                    <label>Reference No.</label>
-                    <input type="text">
-                </div>
-            </div>
+            
 
-        </div>
-
-
-    </div>
-</div>
+ 
 
 
 {{-- BOOTSTRAP MODAL FOR ADDING A NEW CUSTOMER --}}
