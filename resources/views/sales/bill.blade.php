@@ -33,7 +33,7 @@
 
 
                 </div>
-                <div id="scrollable-container" >
+                <div id="scrollable-container">
                     <table class="table table-bordered">
                         <thead class="thead-dark">
                             <tr>
@@ -173,6 +173,21 @@
                 this.quantityField.addEventListener("keypress", (e) => this.handleQuantityEnter(e));
                 this.searchResults.addEventListener("click", (e) => this.handleSearchResultClick(e));
                 this.salesTableBody.addEventListener("click", (e) => this.handleRemoveItemClick(e));
+
+                // Hide search results when search field loses focus
+                this.searchField.addEventListener("blur", () => {
+                    // Add a delay to allow click events on results to process
+                    setTimeout(() => {
+                        this.searchResults.style.display = "none";
+                    }, 150);
+                });
+
+                // Ensure search results remain visible when focused again
+                this.searchField.addEventListener("focus", () => {
+                    if (this.filteredProducts.length > 0) {
+                        this.searchResults.style.display = "block";
+                    }
+                });
             }
 
             handleSearchInput(event) {
