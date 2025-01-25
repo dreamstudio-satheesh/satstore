@@ -56,7 +56,7 @@ class CategoryManagement extends Component
 
     public function delete($id)
     {
-        Category::findOrFail($id)->delete();
+       // Category::findOrFail($id)->delete();
         session()->flash('message', 'Category deleted successfully!');
     }
 }

@@ -80,7 +80,7 @@ class ProductManagement extends Component
 
     public function delete($id)
     {
-        Product::findOrFail($id)->delete();
+       // Product::findOrFail($id)->delete();
         session()->flash('message', 'Product deleted successfully!');
     }
 
