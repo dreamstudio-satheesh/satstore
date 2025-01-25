@@ -559,7 +559,7 @@
 
         $(function() {
             $('#scrollable-container').slimScroll({
-                height: '240px',
+                height: '260px',
                 color: '#000',
                 size: '8px',
                 alwaysVisible: true
