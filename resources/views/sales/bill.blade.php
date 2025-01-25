@@ -15,9 +15,9 @@
                     @include('sales.bill-customer')
 
                     <div class="col-lg-4 col-sm-6 col-12">
-                        <div class="form-group" style="right: 120px;">
+                        <div class="form-group">
                             <div class="input-groupicon">
-                                <label for="">Search Or Scan</label>
+                                <label for=""></label>
                                 <input type="text" id="product-search" placeholder="Scan/Search Product ..." accesskey="s"
                                     autofocus>
                                 <div class="addonset">
