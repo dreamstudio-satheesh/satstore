@@ -159,6 +159,15 @@
             background-color: #007bff;
             color: white;
         }
+
+        .search-dropdown {
+            position: absolute;
+            top: -200px;
+            /* Adjust based on the height of the dropdown */
+            left: 0;
+            z-index: 1000;
+            /* Ensure it stays above other elements */
+        }
     </style>
 @endpush
 
