@@ -65,7 +65,7 @@
             <div class="card">
                 <div class="card-header">
                     <h5>Products</h5>
-                    <input id="searchInput" wire:model.debounce.300ms="search" type="text" class="form-control" placeholder="Search Products...">
+                    <input id="searchInput" wire:model.live.300ms="search" type="text" class="form-control" placeholder="Search Products...">
                 </div>
                 <div class="card-body">
                     @if (session()->has('message'))
