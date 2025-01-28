@@ -37,7 +37,7 @@
                     <h6 class="submenu-hdr">Billing</h6>
                     <ul>
                         <li>
-                            <a href="/billing" wire:navigate>
+                            <a href="/billing" accesskey="b" >
                                 <i data-feather="shopping-cart"></i><span>New Bill</span>
                             </a>
                         </li>
