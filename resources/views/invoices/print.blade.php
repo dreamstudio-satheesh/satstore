@@ -207,7 +207,7 @@
                             <h2>Taxable</h2>
                         </td>
                         <td>
-                            <h2>GST%</h2>
+                            <h2>GST</h2>
                         </td>
                         <td>
                             <h2>Qty</h2>
