@@ -19,7 +19,8 @@
         <!-- Receipt Header -->
         <div class="receipt-top">
             <div class="company-name">
-                <img id="logo" src="https://satsweets.com/logo.png" width="160px" height="107px" title="SAT Sweets" alt="SAT Sweets Logo" />
+                <img id="logo" src="https://satsweets.com/logo.png" width="160px" height="107px"
+                    title="SAT Sweets" alt="SAT Sweets Logo" />
             </div>
             <div class="company-address">
                 3/116A Senkottampalayam, Karunaipalayam Section, Muthiyanerachal (PO) <br>
@@ -67,12 +68,12 @@
                 </thead>
                 <tbody>
                     @foreach ($bill->items as $item)
-                    <tr>
-                        <td>{{ $item->product->name }}</td>
-                        <td>₹{{ number_format($item->price, 2) }}</td>
-                        <td>{{ $item->quantity }}</td>
-                        <td>₹{{ number_format($item->price * $item->quantity, 2) }}</td>
-                    </tr>
+                        <tr>
+                            <td>{{ $item->product->name }}</td>
+                            <td>₹{{ number_format($item->price, 2) }}</td>
+                            <td>{{ $item->quantity }}</td>
+                            <td>₹{{ number_format($item->price * $item->quantity, 2) }}</td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
@@ -84,12 +85,26 @@
                     <div class="text-bill-value">₹{{ number_format($bill->sub_total, 2) }}</div>
                 </div>
                 <div class="text-receipt-seperator"></div>
-                @foreach ($bill->taxes as $tax)
-                <div class="text-bill-list-in">
-                    <div class="text-bill-title"><strong>{{ $tax->rate }}% {{ strtoupper($tax->type) }}:</strong></div>
-                    <div class="text-bill-value">₹{{ number_format($tax->amount, 2) }}</div>
-                </div>
+
+                @php
+                    $groupedTaxes = $bill->items->groupBy('gst_slab')->map(function ($items, $gst_slab) {
+                        $taxable = $items->sum('taxable_value');
+                        $taxAmount = $items->sum('cgst') + $items->sum('sgst');
+                        return [
+                            'gst_slab' => $gst_slab,
+                            'taxable' => $taxable,
+                            'tax_amount' => $taxAmount,
+                        ];
+                    });
+                @endphp
+
+                @foreach ($groupedTaxes as $group)
+                    <div class="text-bill-list-in">
+                        <div class="text-bill-title"><strong>{{ $group['gst_slab'] }}% GST:</strong></div>
+                        <div class="text-bill-value">₹{{ number_format($group['tax_amount'], 2) }}</div>
+                    </div>
                 @endforeach
+
                 <div class="text-receipt-seperator"></div>
                 <div class="text-bill-list-in">
                     <div class="text-bill-title">Total Bill:</div>
