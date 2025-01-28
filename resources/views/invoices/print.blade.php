@@ -17,6 +17,7 @@
             /* Ensure all text is dark for printing */
             * {
                 color: #000 !important;
+                font-weight: bold !important;
             }
 
             .page-break {
