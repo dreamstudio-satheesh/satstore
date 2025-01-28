@@ -23,7 +23,7 @@
                     title="SAT Sweets" alt="SAT Sweets Logo" />
             </div>
             <div class="company-address">
-                3/116A Senkottampalayam, Karunaipalayam Section, Muthiyanerachal (PO) <br>
+                3/116A Senkottampalayam, Karunaipalayam Section, <br>
                 Trichy Main Road, Kangeyam
             </div>
             <div class="company-mobile">
