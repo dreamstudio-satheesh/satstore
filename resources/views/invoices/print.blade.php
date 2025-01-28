@@ -187,7 +187,7 @@
 
         <div id="mid">
             <div class="info">
-                <p>Bill Number: {{ sprintf('%04d', $bill->id) }}</p>
+                <p>Bill Number: #{{ sprintf('%04d', $bill->id) }}/24-25</p>
                 <p>Bill Date: {{ $bill->created_at->format('d-m-Y') }}</p>
                 <h2>Billing Address:</h2>
                 <p>{{ $bill->customer->name ?? 'Walk-In Customer' }}</p>
