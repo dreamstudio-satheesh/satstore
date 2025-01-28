@@ -608,9 +608,15 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response) {
-                    alert('Sale finalized successfully!');
+                    //alert('Sale finalized successfully!');
                     salesManager.salesList = []; // Clear sales cart
                     salesManager.updateSalesList(); // Refresh UI
+                    // Open the invoice in a new tab
+                    if (response.id) {
+                        window.open('/invoice/' + response.id, '_blank');
+                    } else {
+                        console.error('No invoice ID returned in response.');
+                    }
                 },
                 error: function(xhr) {
                     alert('Failed to finalize sale. Please try again.');
