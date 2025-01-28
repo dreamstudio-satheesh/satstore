@@ -15,7 +15,7 @@
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="form-group mt-4">
                             <div class="input-groupicon">
-                                <input type="text" id="product-search" placeholder="Scan/Search Product ..." accesskey="s"
+                                <input type="text" id="product-search" placeholder="Scan/Search Product ..." accesskey="k"
                                     autofocus>
                                 <div class="addonset">
                                     <img src="assets/img/icons/scanners.svg" alt="img">
@@ -116,7 +116,7 @@
 
         <!-- Action Buttons -->
         <div class="text-right">
-            <button id="finalize-sale-btn" class="btn btn-success mr-2" accesskey="f">Finalize Sale (ALT+F)</button>
+            <button id="finalize-sale-btn" class="btn btn-success mr-2" accesskey="s">Save (ALT+S)</button>
            {{--  <button id="clear-sale-btn" class="btn btn-danger" accesskey="e">Clear Sale (F2)</button> --}}
         </div>
     </div>
