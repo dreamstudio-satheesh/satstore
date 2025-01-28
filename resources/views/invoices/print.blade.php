@@ -125,19 +125,19 @@
                         </tr>
                     @endforeach
                     <tr class="tabletitle">
-                        <td colspan="4" style="text-align: right;"><h2>CGST</h2></td>
+                        <td colspan="3" style="text-align: right;"><h2>CGST</h2></td>
                         <td style="text-align: right;"><h2>{{ number_format($bill->items->sum('cgst'), 2) }}</h2></td>
                     </tr>
                     <tr class="tabletitle">
-                        <td colspan="4" style="text-align: right;"><h2>SGST</h2></td>
+                        <td colspan="3" style="text-align: right;"><h2>SGST</h2></td>
                         <td style="text-align: right;"><h2>{{ number_format($bill->items->sum('sgst'), 2) }}</h2></td>
                     </tr>
                     <tr class="tabletitle">
-                        <td colspan="4" style="text-align: right;"><h2>GST Total</h2></td>
+                        <td colspan="3" style="text-align: right;"><h2>GST Total</h2></td>
                         <td style="text-align: right;"><h2>{{ number_format($bill->items->sum('cgst') + $bill->items->sum('sgst'), 2) }}</h2></td>
                     </tr>
                     <tr class="tabletitle">
-                        <td colspan="4" style="text-align: right;"><h2>Grand Total</h2></td>
+                        <td colspan="3" style="text-align: right;"><h2>Grand Total</h2></td>
                         <td style="text-align: right;"><h2>{{ number_format($bill->final_amount, 2) }}</h2></td>
                     </tr>
                 </table>
