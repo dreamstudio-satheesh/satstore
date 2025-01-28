@@ -64,7 +64,7 @@
                     <ul>
                         <li>
                             <a href="/users" accesskey="u">
-                                <i data-feather="users"></i><span>Users</span>
+                                <i data-feather="users"></i><span> (u)</span>
                             </a>
                         </li>
                         <li>
