@@ -10,7 +10,6 @@
             html,
             body {
                 width: 80mm;
-                height: 100%;
                 position: absolute;
             }
 
