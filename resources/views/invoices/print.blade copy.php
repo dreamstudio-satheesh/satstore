@@ -3,144 +3,107 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>POS Receipt</title>
-    <style>
-        @media print {
-            html, body {
-                width: 80mm;
-                height: 100%;
-                position: absolute;
-            }
-            .page-break {
-                display: block;
-                page-break-before: always;
-            }
-        }
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="bill, receipt">
+    <meta name="author" content="ElitePOS">
+    <title>POS - Invoice Page</title>
 
-        #invoice-POS {
-            box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
-            padding: 2mm;
-            margin: 0 auto;
-            width: 80mm;
-            background: #FFF;
-        }
-
-        #invoice-POS h1 {
-            font-size: 1.5em;
-            color: #222;
-        }
-
-        #invoice-POS h2 {
-            font-size: .9em;
-        }
-
-        #invoice-POS h3 {
-            font-size: 1.2em;
-            font-weight: 300;
-            line-height: 2em;
-        }
-
-        #invoice-POS p {
-            font-size: .7em;
-            color: #666;
-            line-height: 1.2em;
-        }
-
-        #invoice-POS .info {
-            display: block;
-            margin-left: 0;
-        }
-
-        #invoice-POS table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        #invoice-POS .tabletitle {
-            font-size: .5em;
-            background: #EEE;
-        }
-
-        #invoice-POS .service {
-            font-size: 1.2em;
-            border-bottom: 1px solid #EEE;
-        }
-
-        #invoice-POS .item {
-            width: 42mm;
-        }
-
-        #invoice-POS .itemtext {
-            font-size: .5em;
-        }
-
-        #invoice-POS #legalcopy {
-            margin-top: 5mm;
-        }
-    </style>
+    <!-- Style -->
+    <link href="https://satsweets.com/assets/css/pos.css" rel="stylesheet" />
 </head>
 
-<body>
-    <div id="invoice-POS">
-        <center id="top">
-            <div class="logo"></div>
-            <div class="info">
-                <h2>SAT Sweets</h2>
-                <p>
-                    3/147 Karunaipalayam Pirivu,<br>
-                    Covai-Tiruchy Main Road,<br>
-                    Kangeyam -638701
-                </p>
+<body class="section-bg-one">
+    <main class="container receipt-wrapper" id="download-section">
+        <!-- Receipt Header -->
+        <div class="receipt-top">
+            <div class="company-name">
+                <img id="logo" src="https://satsweets.com/logo.png" width="160px" height="107px" title="SAT Sweets" alt="SAT Sweets Logo" />
             </div>
-        </center>
-
-        <div id="mid">
-            <div class="info">
-                <p>Bill Number: {{ sprintf('%04d', $bill->id) }}</p>
-                <p>Bill Date: {{ $bill->created_at->format('d-m-Y') }}</p>
-                <h2>Billing Address:</h2>
-                <p>{{ $bill->customer->name ?? 'Walk-In Customer' }}</p>
-                <p>{{ $bill->customer->address ?? '-' }}</p>
+            <div class="company-address">
+                3/116A Senkottampalayam, Karunaipalayam Section, Muthiyanerachal (PO) <br>
+                Trichy Main Road, Kangeyam
+            </div>
+            <div class="company-mobile">
+                Tiruppur-638701 <br>
+                Phone: 90874 49924
             </div>
         </div>
 
-        <div id="bot">
-            <div id="table">
-                <table>
-                    <tr class="tabletitle">
-                        <td><h2>Item</h2></td>
-                        <td><h2>Price</h2></td>
-                        <td><h2>Qty</h2></td>
-                        <td><h2>Sub Total</h2></td>
+        <!-- Receipt Details -->
+        <div class="receipt-body">
+            <div class="receipt-heading">
+                <span>Cash Memo</span>
+            </div>
+            <ul class="text-list text-style1">
+                <li>
+                    <div class="text-list-title">Date:</div>
+                    <div class="text-list-desc">{{ $bill->created_at->format('d/m/Y') }}</div>
+                </li>
+                <li class="text-right">
+                    <div class="text-list-title">Time:</div>
+                    <div class="text-list-desc">{{ $bill->created_at->format('h:i A') }}</div>
+                </li>
+                <li>
+                    <div class="text-list-title">Branch:</div>
+                    <div class="text-list-desc">{{ $branch->name ?? 'Branch Name' }}</div>
+                </li>
+                <li class="text-right">
+                    <div class="text-list-title">Invoice:</div>
+                    <div class="text-list-desc">#{{ sprintf('%05d', $bill->id) }}/24-25</div>
+                </li>
+            </ul>
+
+            <!-- Receipt Table -->
+            <table class="receipt-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Total</th>
                     </tr>
+                </thead>
+                <tbody>
                     @foreach ($bill->items as $item)
-                        <tr class="service">
-                            <td><p class="itemtext">{{ $item->product->name_tamil }}</p></td>
-                            <td><p class="itemtext">{{ number_format($item->price, 2) }}</p></td>
-                            <td><p class="itemtext">{{ $item->quantity }}</p></td>
-                            <td><p class="itemtext">{{ number_format($item->price * $item->quantity, 2) }}</p></td>
-                        </tr>
+                    <tr>
+                        <td>{{ $item->product->name }}</td>
+                        <td>₹{{ number_format($item->price, 2) }}</td>
+                        <td>{{ $item->quantity }}</td>
+                        <td>₹{{ number_format($item->price * $item->quantity, 2) }}</td>
+                    </tr>
                     @endforeach
-                    <tr class="tabletitle">
-                        <td></td>
-                        <td></td>
-                        <td class="Rate"><h2>Tax</h2></td>
-                        <td class="payment"><h2>{{ number_format($bill->items->sum('cgst') + $bill->items->sum('sgst'), 2) }}</h2></td>
-                    </tr>
-                    <tr class="tabletitle">
-                        <td></td>
-                        <td></td>
-                        <td class="Rate"><h2>Total</h2></td>
-                        <td class="payment"><h2>{{ number_format($bill->final_amount, 2) }}</h2></td>
-                    </tr>
-                </table>
+                </tbody>
+            </table>
+
+            <!-- Bill Summary -->
+            <div class="text-bill-list mb-15">
+                <div class="text-bill-list-in">
+                    <div class="text-bill-title">Sub-Total:</div>
+                    <div class="text-bill-value">₹{{ number_format($bill->sub_total, 2) }}</div>
+                </div>
+                <div class="text-receipt-seperator"></div>
+                @foreach ($bill->taxes as $tax)
+                <div class="text-bill-list-in">
+                    <div class="text-bill-title"><strong>{{ $tax->rate }}% {{ strtoupper($tax->type) }}:</strong></div>
+                    <div class="text-bill-value">₹{{ number_format($tax->amount, 2) }}</div>
+                </div>
+                @endforeach
+                <div class="text-receipt-seperator"></div>
+                <div class="text-bill-list-in">
+                    <div class="text-bill-title">Total Bill:</div>
+                    <div class="text-bill-value">₹{{ number_format($bill->total_amount, 2) }}</div>
+                </div>
             </div>
 
-            <div id="legalcopy">
-                <p class="legal"><strong>Thank you for your business!</strong> SAT Sweets.</p>
+            <!-- Footer -->
+            <div class="mb-10">
+                <h4 class="mt-4 mb-2 text-title font-700 receipt-top">Thank you for shopping with us!</h4>
+                <p class="text-center">Customer: {{ $bill->customer->name ?? 'Walk-In Customer' }}</p>
             </div>
         </div>
-    </div>
+    </main>
 </body>
 
 </html>
