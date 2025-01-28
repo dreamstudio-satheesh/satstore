@@ -6,11 +6,19 @@
     <title>POS Receipt</title>
     <style>
         @media print {
-            html, body {
+
+            html,
+            body {
                 width: 80mm;
                 height: 100%;
                 position: absolute;
             }
+
+            /* Ensure all text is dark for printing */
+            * {
+                color: #000 !important;
+            }
+
             .page-break {
                 display: block;
                 page-break-before: always;
@@ -105,44 +113,80 @@
         </div>
 
         <div id="bot">
-            
+
             <div id="table">
                 <table>
                     <tr class="tabletitle">
-                        <td><h2>Item</h2></td>
-                        <td><h2>Taxable</h2></td>
-                        <td><h2>GST%</h2></td>
-                        <td><h2>Qty</h2></td>
-                        <td><h2>Total</h2></td>
+                        <td>
+                            <h2>Item</h2>
+                        </td>
+                        <td>
+                            <h2>Taxable</h2>
+                        </td>
+                        <td>
+                            <h2>GST%</h2>
+                        </td>
+                        <td>
+                            <h2>Qty</h2>
+                        </td>
+                        <td>
+                            <h2>Total</h2>
+                        </td>
                     </tr>
                     @foreach ($bill->items as $item)
                         <tr class="service">
-                            <td><p class="itemtext">{{ $item->product->name_tamil }}</p></td>
-                            <td><p class="itemtext">{{ number_format($item->taxable_value, 2) }}</p></td>
-                            <td><p class="itemtext">{{ $item->gst_slab }}%</p></td>
-                            <td><p class="itemtext">{{ $item->quantity }}</p></td>
-                            <td><p class="itemtext">{{ number_format($item->price * $item->quantity, 2) }}</p></td>
+                            <td>
+                                <p class="itemtext">{{ $item->product->name_tamil }}</p>
+                            </td>
+                            <td>
+                                <p class="itemtext">{{ number_format($item->taxable_value, 2) }}</p>
+                            </td>
+                            <td>
+                                <p class="itemtext">{{ $item->gst_slab }}%</p>
+                            </td>
+                            <td>
+                                <p class="itemtext">{{ $item->quantity }}</p>
+                            </td>
+                            <td>
+                                <p class="itemtext">{{ number_format($item->price * $item->quantity, 2) }}</p>
+                            </td>
                         </tr>
                     @endforeach
                     <tr class="tabletitle">
-                        <td colspan="4" style="text-align: right;"><h2>CGST</h2></td>
-                        <td style="text-align: right;"><h2>{{ number_format($bill->items->sum('cgst'), 2) }}</h2></td>
+                        <td colspan="4" style="text-align: right;">
+                            <h2>CGST</h2>
+                        </td>
+                        <td style="text-align: right;">
+                            <h2>{{ number_format($bill->items->sum('cgst'), 2) }}</h2>
+                        </td>
                     </tr>
                     <tr class="tabletitle">
-                        <td colspan="4" style="text-align: right;"><h2>SGST</h2></td>
-                        <td style="text-align: right;"><h2>{{ number_format($bill->items->sum('sgst'), 2) }}</h2></td>
+                        <td colspan="4" style="text-align: right;">
+                            <h2>SGST</h2>
+                        </td>
+                        <td style="text-align: right;">
+                            <h2>{{ number_format($bill->items->sum('sgst'), 2) }}</h2>
+                        </td>
                     </tr>
                     <tr class="tabletitle">
-                        <td colspan="4" style="text-align: right;"><h2>GST Total</h2></td>
-                        <td style="text-align: right;"><h2>{{ number_format($bill->items->sum('cgst') + $bill->items->sum('sgst'), 2) }}</h2></td>
+                        <td colspan="4" style="text-align: right;">
+                            <h2>GST Total</h2>
+                        </td>
+                        <td style="text-align: right;">
+                            <h2>{{ number_format($bill->items->sum('cgst') + $bill->items->sum('sgst'), 2) }}</h2>
+                        </td>
                     </tr>
                     <tr class="tabletitle">
-                        <td colspan="4" style="text-align: right;"><h2>Grand Total</h2></td>
-                        <td style="text-align: right;"><h2>{{ number_format($bill->final_amount, 2) }}</h2></td>
+                        <td colspan="4" style="text-align: right;">
+                            <h2>Grand Total</h2>
+                        </td>
+                        <td style="text-align: right;">
+                            <h2>{{ number_format($bill->final_amount, 2) }}</h2>
+                        </td>
                     </tr>
                 </table>
             </div>
-            
+
 
             <div id="legalcopy">
                 <p class="legal"><strong>Thank you for your business!</strong> SAT Sweets.</p>
