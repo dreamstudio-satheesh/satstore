@@ -15,7 +15,7 @@
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="form-group mt-4">
                             <div class="input-groupicon">
-                                <input type="text" id="product-search" placeholder="Scan/Search Product ..." accesskey="k"
+                                <input type="text" id="product-search" placeholder="Scan/Search (ALT+A) ..." accesskey="a"
                                     autofocus>
                                 <div class="addonset">
                                     <img src="assets/img/icons/scanners.svg" alt="img">
