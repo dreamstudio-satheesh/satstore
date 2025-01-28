@@ -115,7 +115,7 @@
                         <td><h2>Qty</h2></td>
                         <td><h2>Total</h2></td>
                     </tr>
-                    @foreach ($bill->billItems as $item)
+                    @foreach ($bill->items as $item)
                         <tr class="service">
                             <td><p class="itemtext">{{ $item->product->name_tamil }}</p></td>
                             <td><p class="itemtext">{{ number_format($item->taxable_value, 2) }}</p></td>
@@ -126,15 +126,15 @@
                     @endforeach
                     <tr class="tabletitle">
                         <td colspan="4" style="text-align: right;"><h2>CGST</h2></td>
-                        <td style="text-align: right;"><h2>{{ number_format($bill->billItems->sum('cgst'), 2) }}</h2></td>
+                        <td style="text-align: right;"><h2>{{ number_format($bill->items->sum('cgst'), 2) }}</h2></td>
                     </tr>
                     <tr class="tabletitle">
                         <td colspan="4" style="text-align: right;"><h2>SGST</h2></td>
-                        <td style="text-align: right;"><h2>{{ number_format($bill->billItems->sum('sgst'), 2) }}</h2></td>
+                        <td style="text-align: right;"><h2>{{ number_format($bill->items->sum('sgst'), 2) }}</h2></td>
                     </tr>
                     <tr class="tabletitle">
                         <td colspan="4" style="text-align: right;"><h2>GST Total</h2></td>
-                        <td style="text-align: right;"><h2>{{ number_format($bill->billItems->sum('cgst') + $bill->billItems->sum('sgst'), 2) }}</h2></td>
+                        <td style="text-align: right;"><h2>{{ number_format($bill->items->sum('cgst') + $bill->items->sum('sgst'), 2) }}</h2></td>
                     </tr>
                     <tr class="tabletitle">
                         <td colspan="4" style="text-align: right;"><h2>Grand Total</h2></td>
