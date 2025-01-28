@@ -48,7 +48,7 @@
                 </li>
                 <li>
                     <div class="text-list-title">Branch:</div>
-                    <div class="text-list-desc">{{ $branch->name ?? 'Branch Name' }}</div>
+                    <div class="text-list-desc">Main</div>
                 </li>
                 <li class="text-right">
                     <div class="text-list-title">Invoice:</div>
