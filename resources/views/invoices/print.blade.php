@@ -277,6 +277,13 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Trigger the print dialog when the page loads
+        window.onload = function() {
+            window.print();
+        };
+    </script>
 </body>
 
 </html>
