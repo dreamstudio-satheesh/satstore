@@ -39,6 +39,9 @@ Route::post('bills', [BillController::class, 'store'])->name('bills.store');
 
 Route::get('/billing', [SaleController::class, 'bill'])->name('sale.bill');
 
+Route::get('/invoice/{billId}', [BillController::class, 'showInvoice'])->name('invoice.show');
+
+
 
 
  Route::get('/home', Dashboard::class);

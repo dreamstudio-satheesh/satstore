@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class BillController extends Controller
 {
-     /**
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -20,7 +20,16 @@ class BillController extends Controller
         $this->middleware('auth');
     }
 
-   
+
+    public function showInvoice($billId)
+    {
+        $bill = Bill::with(['customer', 'user', 'billItems.product'])->findOrFail($billId);
+
+        return view('invoices.print', compact('bill'));
+    }
+
+
+
 
     /**
      * Search products for Select2 AJAX.
@@ -34,8 +43,8 @@ class BillController extends Controller
         $query = Product::query();
         if ($term) {
             $query->where('name_english', 'LIKE', "%{$term}%")
-                  ->orWhere('name_tamil', 'LIKE', "%{$term}%")
-                  ->orWhere('barcode', 'LIKE', "%{$term}%");
+                ->orWhere('name_tamil', 'LIKE', "%{$term}%")
+                ->orWhere('barcode', 'LIKE', "%{$term}%");
         }
 
         $products = $query->get();
@@ -73,17 +82,18 @@ class BillController extends Controller
             'items.*.price' => 'required|numeric|min:0',
             'items.*.gst_slab' => 'required|in:5,12,18',
         ]);
-    
+
         DB::transaction(function () use ($validated) {
-            
+
             $bill = Bill::create([
-                'user_id' => auth()->id(), /** @Disregard [OPTIONAL_CODE] [OPTION_DESCRIPTION] */
+                'user_id' => auth()->id(),
+                /** @Disregard [OPTIONAL_CODE] [OPTION_DESCRIPTION] */
                 'customer_id' => $validated['customer_id'],
                 'total_amount' => $validated['subtotal'],
                 'discount' => $validated['discount'],
                 'final_amount' => $validated['total'],
             ]);
-        
+
             // Insert bill items with tax details
             foreach ($validated['items'] as $item) {
                 $taxableValue = $item['price'] / (1 + ($item['gst_slab'] / 100));
@@ -102,13 +112,13 @@ class BillController extends Controller
                 ]);
             }
         });
-        
+
 
         return response()->json(['message' => 'Bill created successfully.']);
-    
+
 
         // After saving, just redirect
-       /*  return redirect()->route('bill.create')
+        /*  return redirect()->route('bill.create')
             ->with('success', 'Bill created successfully!'); */
     }
 }
