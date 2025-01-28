@@ -618,6 +618,12 @@
                             '_blank',
                             'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=800,height=600'
                         );
+
+                        // Trigger the print dialog when the content is fully loaded
+                        printWindow.onload = function() {
+                            printWindow.focus(); // Focus the new window
+                            printWindow.print(); // Open the print dialog
+                        };
                     } else {
                         console.error('No invoice ID returned in response.');
                     }
