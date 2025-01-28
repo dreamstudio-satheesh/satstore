@@ -177,9 +177,9 @@
             <div class="logo"><img id="logo" src="https://satsweets.com/logo.png" width="160px" height="107px"
                 title="SAT Sweets" alt="SAT Sweets Logo" /></div>
             <div class="info">
-                <h2>SAT Sweets</h2>
+              
                 <p>
-                    3/147 Karunaipalayam Pirivu,<br>
+                    3/147 Karunaipalayam Pirivu,
                     Covai-Tiruchy Main Road,<br>
                     Kangeyam -638701
                 </p>
