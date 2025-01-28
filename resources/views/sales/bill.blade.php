@@ -116,8 +116,8 @@
 
         <!-- Action Buttons -->
         <div class="text-right">
-            <button id="finalize-sale-btn" class="btn btn-success mr-2" accesskey="f">Finalize Sale (F3)</button>
-            <button id="clear-sale-btn" class="btn btn-danger" accesskey="e">Clear Sale (F2)</button>
+            <button id="finalize-sale-btn" class="btn btn-success mr-2" accesskey="f">Finalize Sale (ALT+F)</button>
+           {{--  <button id="clear-sale-btn" class="btn btn-danger" accesskey="e">Clear Sale (F2)</button> --}}
         </div>
     </div>
 
