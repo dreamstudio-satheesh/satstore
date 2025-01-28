@@ -180,7 +180,8 @@
               
                 <p>
                     3/147 Karunaipalayam Pirivu,  Covai-Tiruchy Main Road,<br>
-                    Kangeyam -638701 Phone: 90874 49924 ~ GST NO :33ATOPR7702H1ZF
+                    Kangeyam -638701 Phone: 90874 49924 <br>
+                    ~ ~ ~ GST NO :33ATOPR7702H1ZF
                 </p>
             </div>
         </center>
