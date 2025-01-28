@@ -23,7 +23,7 @@ class BillController extends Controller
 
     public function showInvoice($billId)
     {
-        $bill = Bill::with(['customer', 'user', 'billItems.product'])->findOrFail($billId);
+        $bill = Bill::with(['customer', 'user', 'items.product'])->findOrFail($billId);
 
         return view('invoices.print', compact('bill'));
     }

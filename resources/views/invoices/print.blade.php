@@ -64,7 +64,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($bill->billItems as $index => $item)
+                @foreach ($bill->items as $index => $item)
                     <tr>
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $item->product->name_tamil }}</td>
