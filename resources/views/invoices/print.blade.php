@@ -1,91 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invoice #{{ $bill->id }}</title>
+    <title>POS Receipt</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+        @media print {
+            html, body {
+                width: 80mm;
+                height: 100%;
+                position: absolute;
+            }
+            .page-break {
+                display: block;
+                page-break-before: always;
+            }
         }
-        .invoice-box {
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #eee;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+
+        #invoice-POS {
+            box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
+            padding: 2mm;
+            margin: 0 auto;
+            width: 80mm;
+            background: #FFF;
         }
-        .header, .footer {
-            text-align: center;
+
+        #invoice-POS h1 {
+            font-size: 1.5em;
+            color: #222;
         }
-        .items-table {
+
+        #invoice-POS h2 {
+            font-size: .9em;
+        }
+
+        #invoice-POS h3 {
+            font-size: 1.2em;
+            font-weight: 300;
+            line-height: 2em;
+        }
+
+        #invoice-POS p {
+            font-size: .7em;
+            color: #666;
+            line-height: 1.2em;
+        }
+
+        #invoice-POS .info {
+            display: block;
+            margin-left: 0;
+        }
+
+        #invoice-POS table {
             width: 100%;
             border-collapse: collapse;
         }
-        .items-table th, .items-table td {
-            border: 1px solid #ddd;
-            padding: 8px;
+
+        #invoice-POS .tabletitle {
+            font-size: .5em;
+            background: #EEE;
         }
-        .items-table th {
-            background-color: #f2f2f2;
-            text-align: left;
+
+        #invoice-POS .service {
+            font-size: 1.2em;
+            border-bottom: 1px solid #EEE;
+        }
+
+        #invoice-POS .item {
+            width: 42mm;
+        }
+
+        #invoice-POS .itemtext {
+            font-size: .5em;
+        }
+
+        #invoice-POS #legalcopy {
+            margin-top: 5mm;
         }
     </style>
 </head>
+
 <body>
-    <div class="invoice-box">
-        <div class="header">
-            <h1>DreamCoderZ</h1>
-            <p>2/104 Ganapany Maanagar, Paapampatti, Coimbatore - 641016</p>
-            <p>Mobile: 6379108040, 9600673035 | Email: admin@dreamcoderz.com</p>
+    <div id="invoice-POS">
+        <center id="top">
+            <div class="logo"></div>
+            <div class="info">
+                <h2>SAT Sweets</h2>
+                <p>
+                    3/147 Karunaipalayam Pirivu,<br>
+                    Covai-Tiruchy Main Road,<br>
+                    Kangeyam -638701
+                </p>
+            </div>
+        </center>
+
+        <div id="mid">
+            <div class="info">
+                <p>Bill Number: {{ sprintf('%04d', $bill->id) }}</p>
+                <p>Bill Date: {{ $bill->created_at->format('d-m-Y') }}</p>
+                <h2>Billing Address:</h2>
+                <p>{{ $bill->customer->name ?? 'Walk-In Customer' }}</p>
+                <p>{{ $bill->customer->address ?? '-' }}</p>
+            </div>
         </div>
 
-        <h2>Invoice</h2>
-        <p><strong>Invoice ID:</strong> {{ $bill->id }}</p>
-        <p><strong>Date:</strong> {{ $bill->created_at->format('d-m-Y') }}</p>
-        <p><strong>Customer Name:</strong> {{ $bill->customer->name ?? 'Walk-In Customer' }}</p>
-        <p><strong>Mobile:</strong> {{ $bill->customer->mobile ?? '-' }}</p>
-
-        <table class="items-table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Product</th>
-                    <th>HSN Code</th>
-                    <th>GST %</th>
-                    <th>Qty</th>
-                    <th>Price (Incl. Tax)</th>
-                    <th>Taxable Value</th>
-                    <th>CGST</th>
-                    <th>SGST</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($bill->items as $index => $item)
-                    <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $item->product->name_tamil }}</td>
-                        <td>{{ $item->product->hsn_code }}</td>
-                        <td>{{ $item->gst_slab }}%</td>
-                        <td>{{ $item->quantity }}</td>
-                        <td>{{ number_format($item->price, 2) }}</td>
-                        <td>{{ number_format($item->taxable_value, 2) }}</td>
-                        <td>{{ number_format($item->cgst, 2) }}</td>
-                        <td>{{ number_format($item->sgst, 2) }}</td>
-                        <td>{{ number_format($item->price * $item->quantity, 2) }}</td>
+        <div id="bot">
+            <div id="table">
+                <table>
+                    <tr class="tabletitle">
+                        <td><h2>Item</h2></td>
+                        <td><h2>Price</h2></td>
+                        <td><h2>Qty</h2></td>
+                        <td><h2>Sub Total</h2></td>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                    @foreach ($bill->items as $item)
+                        <tr class="service">
+                            <td><p class="itemtext">{{ $item->product->name_tamil }}</p></td>
+                            <td><p class="itemtext">{{ number_format($item->price, 2) }}</p></td>
+                            <td><p class="itemtext">{{ $item->quantity }}</p></td>
+                            <td><p class="itemtext">{{ number_format($item->price * $item->quantity, 2) }}</p></td>
+                        </tr>
+                    @endforeach
+                    <tr class="tabletitle">
+                        <td></td>
+                        <td></td>
+                        <td class="Rate"><h2>Tax</h2></td>
+                        <td class="payment"><h2>{{ number_format($bill->items->sum('cgst') + $bill->items->sum('sgst'), 2) }}</h2></td>
+                    </tr>
+                    <tr class="tabletitle">
+                        <td></td>
+                        <td></td>
+                        <td class="Rate"><h2>Total</h2></td>
+                        <td class="payment"><h2>{{ number_format($bill->final_amount, 2) }}</h2></td>
+                    </tr>
+                </table>
+            </div>
 
-        <h3>Total: ₹{{ number_format($bill->final_amount, 2) }}</h3>
-
-        <div class="footer">
-            <p>Thank you for your business!</p>
+            <div id="legalcopy">
+                <p class="legal"><strong>Thank you for your business!</strong> SAT Sweets.</p>
+            </div>
         </div>
     </div>
 </body>
+
 </html>
