@@ -613,7 +613,11 @@
                     salesManager.updateSalesList(); // Refresh UI
                     // Open the invoice in a new tab
                     if (response.id) {
-                        window.open('/invoice/' + response.id, '_blank');
+                        window.open(
+                            '/invoice/' + response.id,
+                            '_blank',
+                            'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=800,height=600'
+                        );
                     } else {
                         console.error('No invoice ID returned in response.');
                     }
