@@ -117,7 +117,7 @@
         <!-- Action Buttons -->
         <div class="text-right">
             <button id="finalize-sale-btn" class="btn btn-success mr-2" accesskey="s">Save (ALT+S)</button>
-           {{--  <button id="clear-sale-btn" class="btn btn-danger" accesskey="e">Clear Sale (F2)</button> --}}
+            {{--  <button id="clear-sale-btn" class="btn btn-danger" accesskey="e">Clear Sale (F2)</button> --}}
         </div>
     </div>
 
@@ -473,6 +473,20 @@
             salesManager.products = products; // Set products for the manager
         });
 
+        document.addEventListener("keydown", (event) => {
+            const scrollableContainer = document.getElementById("scrollable-container");
+            if (!scrollableContainer) return;
+
+            // Check if up or down arrow key is pressed
+            if (event.key === "ArrowDown") {
+                // Scroll down by 20px (you can adjust this value as needed)
+                scrollableContainer.scrollTop += 20;
+            } else if (event.key === "ArrowUp") {
+                // Scroll up by 20px
+                scrollableContainer.scrollTop -= 20;
+            }
+        });
+
 
         // Initialize Select2
         $('#customer-select').select2({
@@ -618,7 +632,7 @@
                             '_blank',
                             'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=800,height=600'
                         );
-                        
+
                     } else {
                         console.error('No invoice ID returned in response.');
                     }
