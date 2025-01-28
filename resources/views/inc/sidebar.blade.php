@@ -17,13 +17,13 @@
                     <ul>
                         <li>
                             <a href="/products"  accesskey="p">
-                                <i data-feather="box"></i><span>Products</span>
+                                <i data-feather="box"></i><span>Products (P)</span>
                             </a>
                         </li>
                        
                         <li>
                             <a href="/categories" href="/categories" accesskey="t">
-                                <i data-feather="codepen"></i><span>Categories</span>
+                                <i data-feather="codepen"></i><span>Categories (t)</span>
                             </a>
                         </li>
                         <li>
@@ -38,7 +38,7 @@
                     <ul>
                         <li>
                             <a href="/billing" accesskey="b" >
-                                <i data-feather="shopping-cart"></i><span>New Bill</span>
+                                <i data-feather="shopping-cart"></i><span>New Bill (B)</span>
                             </a>
                         </li>
                         <li>
