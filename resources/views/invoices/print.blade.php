@@ -52,7 +52,7 @@
                 </li>
                 <li class="text-right">
                     <div class="text-list-title">Invoice:</div>
-                    <div class="text-list-desc">#{{ sprintf('%05d', $bill->id) }}/24-25</div>
+                    <div class="text-list-desc">#{{ sprintf('%04d', $bill->id) }}/24-25</div>
                 </li>
             </ul>
 
