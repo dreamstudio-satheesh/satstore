@@ -14,15 +14,97 @@
                 position: absolute;
             }
 
-            /* Ensure all text is dark for printing */
-            * {
+            /* General styles for body and paragraphs */
+            body,
+            p {
+                color: #000 !important;
+                font-weight: bold !important;
+                font-size: 0.9em !important;
+                /* Slightly larger text */
+            }
+
+            /* Heading styles */
+            h1 {
+                color: #000 !important;
+                font-weight: bold !important;
+                font-size: 1.8em !important;
+                /* Larger for main title */
+            }
+
+            h2 {
+                color: #000 !important;
+                font-weight: bold !important;
+                font-size: 1.2em !important;
+                /* Slightly larger for subtitles */
+            }
+
+            h3 {
+                color: #000 !important;
+                font-weight: bold !important;
+                font-size: 1.5em !important;
+                /* Increased for emphasis */
+            }
+
+            /* Table styles */
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 0.9em !important;
+                /* Larger for table content */
+            }
+
+            td,
+            th {
+                color: #000 !important;
+                font-weight: bold !important;
+                font-size: 1em !important;
+                /* Slightly larger for clarity */
+            }
+
+            .tabletitle {
+                font-size: 0.8em !important;
+                /* Adjust table title size */
+                background: #EEE;
+            }
+
+            .service {
+                font-size: 1em !important;
+                /* Adjust service item font size */
+                border-bottom: 1px solid #EEE;
+            }
+
+            .item {
+                width: 42mm;
+            }
+
+            .itemtext {
+                font-size: 0.9em !important;
+                /* Slightly larger for item details */
+                color: #000 !important;
+            }
+
+            /* Legal and footer text */
+            #legalcopy,
+            .legal {
+                font-size: 0.9em !important;
+                /* Enlarged for readability */
                 color: #000 !important;
                 font-weight: bold !important;
             }
 
+            /* Page-break for multi-page print */
             .page-break {
                 display: block;
                 page-break-before: always;
+            }
+
+            /* Box shadow removed for print */
+            #invoice-POS {
+                box-shadow: none;
+                padding: 2mm;
+                margin: 0 auto;
+                width: 80mm;
+                background: #FFF;
             }
         }
 
