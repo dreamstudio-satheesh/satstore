@@ -174,7 +174,7 @@
 <body>
     <div id="invoice-POS">
         <center id="top">
-            <div class="logo"><img id="logo" src="https://satsweets.com/logo.png" width="160px" height="107px"
+            <div class="logo"><img id="logo" src="https://store.satsweets.com/assets/img/logo-print.png" width="160px" height="107px"
                 title="SAT Sweets" alt="SAT Sweets Logo" /></div>
             <div class="info">
               
