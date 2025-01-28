@@ -69,7 +69,7 @@
                 <tbody>
                     @foreach ($bill->items as $item)
                         <tr>
-                            <td>{{ $item->product->name }}</td>
+                            <td>{{ $item->product->name_tamil }}</td>
                             <td>₹{{ number_format($item->price, 2) }}</td>
                             <td>{{ $item->quantity }}</td>
                             <td>₹{{ number_format($item->price * $item->quantity, 2) }}</td>
