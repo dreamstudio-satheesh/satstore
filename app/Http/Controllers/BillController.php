@@ -83,7 +83,7 @@ class BillController extends Controller
             'items.*.gst_slab' => 'required|in:5,12,18',
         ]);
 
-        DB::transaction(function () use ($validated) {
+        $bill=DB::transaction(function () use ($validated) {
 
             $bill = Bill::create([
                 'user_id' => auth()->id(),
@@ -111,10 +111,12 @@ class BillController extends Controller
                     'sgst' => $sgst,
                 ]);
             }
+
+            return  $bill ;
         });
 
 
-        return response()->json(['message' => 'Bill created successfully.']);
+        return response()->json(['id' => $bill->id]);
 
 
         // After saving, just redirect
