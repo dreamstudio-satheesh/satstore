@@ -14,7 +14,6 @@
                 <th class="border p-2">#</th>
                 <th class="border p-2">Customer</th>
                 <th class="border p-2">Total</th>
-                <th class="border p-2">Discount</th>
                 <th class="border p-2">Final Amount</th>
                 <th class="border p-2">Date</th>
             </tr>
@@ -25,7 +24,7 @@
                     <td class="border p-2">{{ $bill->id }}</td>
                     <td class="border p-2">{{ $bill->customer?->name ?? 'N/A' }}</td>
                     <td class="border p-2">{{ number_format($bill->total_amount, 2) }}</td>
-                    <td class="border p-2">{{ number_format($bill->discount, 2) }}</td>
+                  {{--   <td class="border p-2">{{ number_format($bill->discount, 2) }}</td> --}}
                     <td class="border p-2 font-bold">{{ number_format($bill->final_amount, 2) }}</td>
                     <td class="border p-2">{{ $bill->created_at->format('d-m-Y') }}</td>
                 </tr>
