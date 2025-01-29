@@ -41,8 +41,10 @@
     </table>
 
     <div class="card">
-        <div class="mt-4">
-            {{ $bills->links() }}
+        <div class="row">
+            <div class="mt-4 col-10">
+                    {{ $bills->links() }}
+            </div>
         </div>
     </div>
 
