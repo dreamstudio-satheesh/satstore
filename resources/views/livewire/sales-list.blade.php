@@ -28,7 +28,7 @@
                   {{--   <td class="border p-2">{{ number_format($bill->discount, 2) }}</td> --}}
                     <td class="border p-2 font-bold">{{ number_format($bill->final_amount, 2) }}</td>
                     <td class="border p-2">{{ $bill->created_at->format('d-m-Y') }}</td>
-                    <td><a class="btn btn-sm btn-primary" href="{{ route('invoice.show', ['id' => $bill->id]) }}">Print</a></td>
+                    <td><a class="btn btn-sm btn-primary" href="{{ route('invoice.show', ['billId' => $bill->id]) }}">Print</a></td>
                 </tr>
             @endforeach
         </tbody>
