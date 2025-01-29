@@ -40,7 +40,7 @@
         </tbody>
     </table>
 
-    <div class="mt-4">
+    <div class="mt-4 mx-5">
         {{ $bills->links() }}
     </div>
 
