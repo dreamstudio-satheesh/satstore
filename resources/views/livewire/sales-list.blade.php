@@ -8,7 +8,7 @@
         </select>
     </div>
 
-    <table class="w-full border-collapse border">
+    <table class="table table-responsive table-border">
         <thead>
             <tr class="bg-gray-200">
                 <th class="border p-2">#</th>
