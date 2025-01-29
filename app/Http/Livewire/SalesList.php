@@ -3,17 +3,6 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-
-class SalesList extends Component
-{
-    public function render()
-    {
-        return view('livewire.sales-list');
-    }
-}
-namespace App\Http\Livewire;
-
-use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Bill;
 
