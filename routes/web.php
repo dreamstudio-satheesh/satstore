@@ -59,4 +59,4 @@ Route::get('/invoice/{billId}', [BillController::class, 'showInvoice'])->name('i
 
  Route::get('/users/create', CreateUser::class);
 
- Route::get('/saleslist', SalesList::class);
+ //Route::get('/saleslist', SalesList::class);
