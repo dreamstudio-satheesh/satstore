@@ -42,7 +42,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/billing/history" wire:navigate>
+                            <a href="/saleslist" wire:navigate>
                                 <i data-feather="file-text"></i><span>Bill History</span>
                             </a>
                         </li>

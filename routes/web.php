@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\Dashboard;
+use App\Http\Livewire\SalesList;
 use App\Http\Livewire\CreateUser;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Livewire\UserManagement;
@@ -57,3 +58,5 @@ Route::get('/invoice/{billId}', [BillController::class, 'showInvoice'])->name('i
  Route::get('/users', UserManagement::class);
 
  Route::get('/users/create', CreateUser::class);
+
+ Route::get('/saleslist', SalesList::class);
