@@ -1,12 +1,19 @@
 <div>
-    <div class="flex justify-between mb-4">
-        <input type="text" wire:model.live.debounce.500ms="search" class="border p-2 rounded"
-            placeholder="Search by ID or Customer Name">
-        <select wire:model="perPage" class="border p-2 rounded">
-            <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-        </select>
+
+    <div class="row">
+        <!-- Sales List -->
+        <div class="col-lg-8 col-md-8 col-sm-12">
+            <div class="flex justify-between mb-4">
+                <input type="text" wire:model.live.debounce.500ms="search" class="border p-2 rounded"
+                    placeholder="Search by ID or Customer Name">
+                <select wire:model="perPage" class="border p-2 rounded">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                </select>
+            </div>
+
+        </div>
     </div>
 
     <table class="table table-responsive table-border">
@@ -40,10 +47,11 @@
         </tbody>
     </table>
 
+
     <div class="card">
         <div class="row">
             <div class="mt-4 col-10">
-                    {{ $bills->links() }}
+                {{ $bills->links() }}
             </div>
         </div>
     </div>
