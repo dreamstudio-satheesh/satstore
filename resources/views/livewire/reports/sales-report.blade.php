@@ -8,6 +8,7 @@
         <table>
             <thead>
                 <tr>
+                    <th class="left">Time</th>
                     <th class="left">Customer</th>
                     <th class="right">Amount</th>
                 </tr>
@@ -15,6 +16,7 @@
             <tbody>
                 @foreach ($todayBills as $bill)
                     <tr>
+                        <td class="left">{{ $bill->created_at->timezone('Asia/Kolkata')->format('h:i A') }}</td>
                         <td class="left">{{ $bill->customer->name ?? 'Walk-in Customer' }}</td>
                         <td class="right">₹{{ number_format($bill->final_amount, 2) }}</td>
                     </tr>
