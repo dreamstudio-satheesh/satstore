@@ -70,11 +70,11 @@
 
             function confirmDelete(billId) {
                 if (confirm('Are you sure you want to delete this bill?')) {
-                    Livewire.dispatch('deleteBill', { billId: billId });
+                    $wire.dispatch('deleteBill', { billId: billId });
                 }
             }
 
-            Livewire.on('bill-deleted', event => {
+            $wire.on('bill-deleted', event => {
                 alert('Bill deleted successfully!');
             });
         </script>
