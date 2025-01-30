@@ -528,6 +528,11 @@
         function openNewCustomerModal(mobile) {
             $('#addCustomerModal input[name="mobile"]').val(mobile);
             $('#addCustomerModal').modal('show');
+
+            // Focus on name input after modal animation completes
+            $('#addCustomerModal').on('shown.bs.modal', function() {
+                $('#addCustomerModal input[name="name"]').focus();
+            });
         }
 
         // Set "Cash Bill" as the default customer on page load
