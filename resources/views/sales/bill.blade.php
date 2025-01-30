@@ -508,6 +508,8 @@
                 processResults: function(data) {
                     // Check if no results and term is a mobile number
                     if (data.length === 0 && isMobileNumber(lastSearchTerm)) {
+                        // Close dropdown first
+                        $('#customer-select').select2('close');
                         openNewCustomerModal(lastSearchTerm); // Open modal with mobile number
                     }
                     return {
