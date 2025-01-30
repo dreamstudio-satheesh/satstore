@@ -23,7 +23,7 @@
                 <th class="border p-2">Customer</th>
                 <th class="border p-2">Total</th>
                 <th class="border p-2">Final Amount</th>
-                <th class="border p-2">Date</th>
+                <th class="border p-2">Date & Time</th>
                 <th class="border p-2">Action</th>
             </tr>
         </thead>
@@ -33,14 +33,17 @@
                     <td class="border p-2">{{ $bill->id }}</td>
                     <td class="border p-2">{{ $bill->customer?->name ?? 'N/A' }}</td>
                     <td class="border p-2">{{ number_format($bill->total_amount, 2) }}</td>
-                    {{--   <td class="border p-2">{{ number_format($bill->discount, 2) }}</td> --}}
                     <td class="border p-2 font-bold">{{ number_format($bill->final_amount, 2) }}</td>
-                    <td class="border p-2">{{ $bill->created_at->format('d-m-Y') }}</td>
-                    <td>
+                    <td class="border p-2">{{ $bill->created_at->format('d M Y, h:i A') }}</td>
+                    <td class="border p-2">
                         <a href="{{ route('invoice.show', ['billId' => $bill->id]) }}"
                             onclick="openInvoice(event, '{{ route('invoice.show', ['billId' => $bill->id]) }}')">
                             <span class="badges bg-lightred">Print</span>
                         </a>
+                        <button class="badges bg-red-500 text-white p-1 rounded ml-2"
+                            onclick="confirmDelete({{ $bill->id }})">
+                            Delete
+                        </button>
                     </td>
                 </tr>
             @endforeach
@@ -64,6 +67,13 @@
                 window.open(url, '_blank',
                     'toolbar=no, location=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=800, height=600');
             }
+
+            function confirmDelete(billId) {
+                if (confirm('Are you sure you want to delete this bill?')) {
+                    Livewire.emit('deleteBill', billId);
+                }
+            }
         </script>
     @endpush
+
 </div>

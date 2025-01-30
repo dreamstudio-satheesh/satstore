@@ -30,4 +30,15 @@ class SalesList extends Component
 
         return view('livewire.sales-list', compact('bills'));
     }
+
+    public function deleteBill($billId)
+    {
+        $bill = Bill::find($billId);
+
+        if ($bill) {
+            $bill->delete();
+            session()->flash('message', 'Bill deleted successfully.');
+        }
+    }
+    
 }
