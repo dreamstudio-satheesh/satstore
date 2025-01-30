@@ -52,7 +52,7 @@
                     <h6 class="submenu-hdr">Customer Management</h6>
                     <ul>
                         <li>
-                            <a href="/customers" accesskey="c">
+                            <a href="/customers">
                                 <i data-feather="user"></i><span>Customers</span>
                             </a>
                         </li>
