@@ -48,7 +48,7 @@
                             <span class="badges bg-lightred">Print</span>
                         </a>
                         <button class="badges bg-red-500 text-white p-1 rounded ml-2"
-                            @click="confirmDelete({{ $bill->id }})">
+                           wire:click="deleteBill({{ $bill->id }})" >
                             Delete
                         </button>
                     </td>
@@ -75,12 +75,7 @@
                     'toolbar=no, location=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=800, height=600');
             }
 
-            function confirmDelete(billId) {
-                if (confirm('Are you sure you want to delete this bill?')) {
-                    // $wire is automatically available in Alpine.js context
-                    this.$wire.deleteBill(billId);
-                }
-            }
+           
         </script>
     @endpush
 
