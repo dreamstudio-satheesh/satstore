@@ -488,56 +488,6 @@
         });
 
 
-        let lastSearchTerm = ''; // Track the last search term
-
-        $('#customer-select').select2({
-            placeholder: 'Type name or mobile...',
-            ajax: {
-                url: '{{ route('customers.search') }}',
-                dataType: 'json',
-                delay: 250,
-                data: function(params) {
-                    lastSearchTerm = params.term; // Store the search term
-                    if (params.term && params.term.length >= 3) {
-                        return {
-                            term: params.term
-                        };
-                    }
-                    return {};
-                },
-                processResults: function(data) {
-                    // Check if no results and term is a mobile number
-                    if (data.length === 0 && isMobileNumber(lastSearchTerm)) {
-                        openNewCustomerModal(lastSearchTerm); // Open modal with mobile number
-                    }
-                    return {
-                        results: data
-                    };
-                },
-                cache: true
-            },
-            minimumInputLength: 3
-        });
-
-        // Check if the term is a 10-digit mobile number
-        function isMobileNumber(term) {
-            return /^\d{10}$/.test(term);
-        }
-
-        // Open modal and set mobile number
-        function openNewCustomerModal(mobile) {
-            // Close Select2 dropdown explicitly
-            $('#customer-select').select2('close');
-
-            $('#addCustomerModal input[name="mobile"]').val(mobile);
-            $('#addCustomerModal').modal('show');
-
-            // Focus on name input after modal animation completes
-            $('#addCustomerModal').on('shown.bs.modal', function() {
-                $('#addCustomerModal input[name="name"]').focus();
-            });
-        }
-
         // Set "Cash Bill" as the default customer on page load
         document.addEventListener('DOMContentLoaded', function() {
             const defaultCustomer = {
@@ -559,48 +509,6 @@
         });
 
 
-
-
-
-
-        // 9. ADD NEW CUSTOMER MODAL//
-
-        $('#newCustomerForm').on('submit', function(e) {
-            e.preventDefault();
-
-            // Collect form data
-            const formData = $(this).serialize();
-
-            // Submit data via AJAX
-            $.ajax({
-                url: '{{ route('customers.store') }}', // Endpoint to create a new customer
-                type: 'POST',
-                data: formData,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'), // CSRF protection
-                },
-                success: function(response) {
-                    // Add new customer to the Select2 dropdown
-                    const newOption = new Option(response.text, response.id, false, true);
-                    $('#customer-select').append(newOption).trigger('change');
-
-                    // Close the modal
-                    $('#addCustomerModal').modal('hide');
-                },
-                error: function(err) {
-                    alert('Failed to create customer. Please try again.');
-                }
-            });
-        });
-
-
-
-        // Set current date in DD-MM-YYYY format
-        const currentDate = new Date();
-        const formattedDate = currentDate.toLocaleDateString('en-GB').replace(/\//g, '-'); // Formats as DD-MM-YYYY
-
-        // Set the value of the invoice date input
-        $('#invoice-date').val(formattedDate);
 
         $(function() {
             $('#scrollable-container').slimScroll({
