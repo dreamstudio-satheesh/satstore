@@ -11,6 +11,7 @@ use App\Http\Controllers\SaleController;
 use App\Http\Livewire\ProductManagement;
 use App\Http\Livewire\CategoryManagement;
 use App\Http\Livewire\CustomerManagement;
+use App\Http\Livewire\Reports\SalesReport;
 use App\Http\Controllers\CustomerController;
 
 Route::get('/',  [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm']);
@@ -43,6 +44,9 @@ Route::get('/billing', [SaleController::class, 'bill'])->name('sale.bill');
 Route::get('/invoice/{billId}', [BillController::class, 'showInvoice'])->name('invoice.show');
 
 
+
+
+ Route::get('/report/sales', SalesReport::class)->name('report.sales');
 
 
  Route::get('/home', Dashboard::class);
