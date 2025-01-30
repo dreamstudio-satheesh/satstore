@@ -78,7 +78,7 @@
             function confirmDelete(billId) {
                 if (confirm('Are you sure you want to delete this bill?')) {
                     // $wire is automatically available in Alpine.js context
-                    $wire.deleteBill(billId);
+                    this.$wire.deleteBill(billId);
                 }
             }
         </script>
