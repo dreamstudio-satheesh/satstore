@@ -4,7 +4,6 @@ namespace App\Http\Livewire;
 
 use App\Models\Bill;
 use Livewire\Component;
-use Livewire\Attributes\On;
 use Livewire\WithPagination;
 
 class SalesList extends Component
@@ -33,7 +32,6 @@ class SalesList extends Component
         return view('livewire.sales-list', compact('bills'));
     }
 
-    #[On('delete-bill')]
     public function deleteBill($billId)
     {
         $bill = Bill::find($billId);
