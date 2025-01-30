@@ -594,12 +594,45 @@
                 return;
             }
 
+
             const customerId = $('#customer-select').val(); // Selected customer ID
             const invoiceDate = $('#invoice-date').val(); // Invoice date
             const discount = parseFloat($('#discount').val()) || 0.00; // Discount input
             const subtotal = parseFloat(document.getElementById('subtotal').textContent);
             const tax = parseFloat(document.getElementById('tax').textContent);
             const total = parseFloat(document.getElementById('total').textContent);
+
+            // If the selected customer is "Cash Bill", show an alert and then proceed with the math check
+            if (customerId == 1) {
+                alert("Warning: You have not selected a customer! This is important for accounting records.");
+
+                let correctAnswer = false;
+
+                while (!correctAnswer) {
+                    // Generate two random numbers
+                    let num1 = Math.floor(Math.random() * 100) + 1; // Random number between 1-10
+                    let num2 = Math.floor(Math.random() * 100) + 1; // Random number between 1-10
+                    let expectedSum = num1 + num2;
+
+                    // Prompt the user to enter the sum
+                    let userAnswer = prompt(`Security Check: What is ${num1} + ${num2}?`);
+
+                    // If the user cancels or enters a blank value, stop process
+                    if (userAnswer === null || userAnswer.trim() === "") {
+                        alert("Sale process canceled.");
+                        return;
+                    }
+
+                    // Convert answer to number and check correctness
+                    if (parseInt(userAnswer) === expectedSum) {
+                        correctAnswer = true;
+                    } else {
+                        alert("Incorrect answer! Try again.");
+                    }
+                }
+            }
+
+
 
             // Prepare data payload
             const payload = {
