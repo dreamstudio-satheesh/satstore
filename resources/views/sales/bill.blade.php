@@ -488,14 +488,16 @@
         });
 
 
-        // Initialize Select2
+        let lastSearchTerm = ''; // Track the last search term
+
         $('#customer-select').select2({
             placeholder: 'Type name or mobile...',
             ajax: {
-                url: '{{ route('customers.search') }}', // API endpoint
+                url: '{{ route('customers.search') }}',
                 dataType: 'json',
                 delay: 250,
                 data: function(params) {
+                    lastSearchTerm = params.term; // Store the search term
                     if (params.term && params.term.length >= 3) {
                         return {
                             term: params.term
@@ -504,6 +506,10 @@
                     return {};
                 },
                 processResults: function(data) {
+                    // Check if no results and term is a mobile number
+                    if (data.length === 0 && isMobileNumber(lastSearchTerm)) {
+                        openNewCustomerModal(lastSearchTerm); // Open modal with mobile number
+                    }
                     return {
                         results: data
                     };
@@ -512,6 +518,17 @@
             },
             minimumInputLength: 3
         });
+
+        // Check if the term is a 10-digit mobile number
+        function isMobileNumber(term) {
+            return /^\d{10}$/.test(term);
+        }
+
+        // Open modal and set mobile number
+        function openNewCustomerModal(mobile) {
+            $('#addCustomerModal input[name="mobile"]').val(mobile);
+            $('#addCustomerModal').modal('show');
+        }
 
         // Set "Cash Bill" as the default customer on page load
         document.addEventListener('DOMContentLoaded', function() {
@@ -605,34 +622,7 @@
             // If the selected customer is "Cash Bill", show an alert and then proceed with the math check
             if (customerId == 1) {
                 alert("Warning: You have not selected a customer! This is important for accounting records.");
-
-                let correctAnswer = false;
-
-                while (!correctAnswer) {
-                    // Generate two random numbers
-                    let num1 = Math.floor(Math.random() * 100) + 1; // Random number between 1-10
-                    let num2 = Math.floor(Math.random() * 100) + 1; // Random number between 1-10
-                    let expectedSum = num1 + num2;
-
-                    // Prompt the user to enter the sum
-                    let userAnswer = prompt(`Security Check: What is ${num1} + ${num2}?`);
-
-                    // If the user cancels or enters a blank value, stop process
-                    if (userAnswer === null || userAnswer.trim() === "") {
-                        alert("Sale process canceled.");
-                        return;
-                    }
-
-                    // Convert answer to number and check correctness
-                    if (parseInt(userAnswer) === expectedSum) {
-                        correctAnswer = true;
-                    } else {
-                        alert("Incorrect answer! Try again.");
-                    }
-                }
             }
-
-
 
             // Prepare data payload
             const payload = {
