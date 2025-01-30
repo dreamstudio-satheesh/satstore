@@ -46,7 +46,7 @@ Route::get('/invoice/{billId}', [BillController::class, 'showInvoice'])->name('i
 
 
 
- Route::get('/reports/sales', SalesReport::class)->name('report.sales');
+ Route::get('/reports/sales', SalesReport::class)->name('reports.sales');
 
 
  Route::get('/home', Dashboard::class);

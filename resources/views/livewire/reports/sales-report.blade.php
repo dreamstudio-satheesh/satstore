@@ -23,6 +23,13 @@
         </table>
 
         <hr>
+
+        <!-- Total Amount Section -->
+        <p class="total">
+            <strong>Total: ₹{{ number_format($todayBills->sum('final_amount'), 2) }}</strong>
+        </p>
+
+        <hr>
         <p class="text-center">Thank You!</p>
     </div>
 
@@ -67,6 +74,13 @@
             border: 0;
             border-top: 1px dashed black;
             margin: 5px 0;
+        }
+
+        .total {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: right;
+            padding: 5px 0;
         }
 
         .print-btn {
