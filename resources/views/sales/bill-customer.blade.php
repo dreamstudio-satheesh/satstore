@@ -4,7 +4,7 @@
                     <label for="customer-select">Customer</label>
                     <div class="row">
                         <div class="col-lg-10 col-sm-10 col-10">
-                            <select id="customer-select" class="form-control" style="width:100%;">
+                            <select id="customer-select" class="form-control" style="width:100%;" accesskey="n">
                             </select>
                         </div>
                         <div class="col-lg-2 col-sm-2 col-2 ps-0">
