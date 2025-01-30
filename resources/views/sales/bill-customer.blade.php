@@ -54,7 +54,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Name *</label>
-                        <input type="text" name="name" class="form-control" required>
+                        <input type="text" name="name" class="form-control" required autofocus>
                     </div>
                     <div class="form-group">
                         <label>Mobile *</label>
