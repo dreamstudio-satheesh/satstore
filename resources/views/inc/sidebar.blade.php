@@ -46,6 +46,11 @@
                                 <i data-feather="file-text"></i><span>Bill History</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="/reports/sales" wire:navigate>
+                                <i data-feather="file-text"></i><span>Sales Report</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="submenu-open">
