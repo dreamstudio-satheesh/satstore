@@ -526,6 +526,9 @@
 
         // Open modal and set mobile number
         function openNewCustomerModal(mobile) {
+            // Close Select2 dropdown explicitly
+            $('#customer-select').select2('close');
+
             $('#addCustomerModal input[name="mobile"]').val(mobile);
             $('#addCustomerModal').modal('show');
 
