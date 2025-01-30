@@ -77,7 +77,7 @@
 
                 function confirmDelete(billId) {
                     if (confirm('Are you sure you want to delete this bill?')) {
-                        this.$wire.deleteBill(billId);
+                        this.$wire.dispatch('delete-bill', {billId});
                     }
                 }
             </script>
