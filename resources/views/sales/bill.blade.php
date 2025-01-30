@@ -529,6 +529,7 @@
         // Open modal and set mobile number
         function openNewCustomerModal(mobile) {
             $('#addCustomerModal input[name="mobile"]').val(mobile);
+            $('#addCustomerModal input[name="name"]').focus();
             $('#addCustomerModal').modal('show');
         }
 
