@@ -74,9 +74,6 @@
                 }
             }
 
-            $wire.on('bill-deleted', event => {
-                alert('Bill deleted successfully!');
-            });
         </script>
     @endpush
 

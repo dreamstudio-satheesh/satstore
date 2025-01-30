@@ -40,8 +40,6 @@ class SalesList extends Component
 
         if ($bill) {
             $bill->delete();
-
-            $this->dispatch('bill-deleted', billId: $billId);
             session()->flash('message', 'Bill deleted successfully.');
         }
     }
