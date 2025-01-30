@@ -2,9 +2,10 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
-use Livewire\WithPagination;
 use App\Models\Bill;
+use Livewire\Component;
+use Livewire\Attributes\On;
+use Livewire\WithPagination;
 
 class SalesList extends Component
 {
@@ -12,6 +13,7 @@ class SalesList extends Component
 
     public $search = '';
     public $perPage = 10;
+
 
     public function updatingSearch()
     {
@@ -31,6 +33,7 @@ class SalesList extends Component
         return view('livewire.sales-list', compact('bills'));
     }
 
+    #[On('deleteBill')]
     public function deleteBill($billId)
     {
         $bill = Bill::find($billId);
