@@ -147,6 +147,11 @@
                     const newOption = new Option(response.text, response.id, false, true);
                     $('#customer-select').append(newOption).trigger('change');
 
+                    // In new customer form submission (add this to success callback)
+                    $('#newCustomerForm')[0].reset(); // Reset form fields
+                    $('#addCustomerModal').find('.is-invalid').removeClass(
+                    'is-invalid'); // Clear validation states
+
                     // Close the modal
                     $('#addCustomerModal').modal('hide');
                 },
