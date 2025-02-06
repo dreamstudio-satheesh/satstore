@@ -191,6 +191,9 @@
                 <p>Bill Date: {{ $bill->created_at->format('d-m-Y') }}</p>
                 <h2>Billing Address:</h2>
                 <p>{{ $bill->customer->name ?? 'Walk-In Customer' }}</p>
+                @if ($bill->customer->mobile)
+                  <p>{{ $bill->customer->mobile }}</p>  
+                @endif
                 <p>{{ $bill->customer->address ?? '-' }}</p>
             </div>
         </div>
