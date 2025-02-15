@@ -168,6 +168,12 @@
         // We store cart data in localStorage under this key
         const CART_KEY = 'myCartData';
 
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
 
         $(document).ready(function() {
 
