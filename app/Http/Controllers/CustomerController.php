@@ -40,11 +40,12 @@ class CustomerController extends Controller
             'mobile' => 'required|string|unique:customers,mobile',
         ]);
 
-        $customer = \App\Models\Customer::create([
-            'name'    => $request->name,
-            'mobile'  => $request->mobile,
-            'address' => $request->address,
-        ]);
+        $customer = \App\Models\Customer::firstOrCreate(
+            ['mobile' => $request->mobile], // The attributes to search for
+            [
+                'name'    => $request->name,
+            ] // The attributes to update or create
+        );
 
         // Return in Select2 format
         return response()->json([
